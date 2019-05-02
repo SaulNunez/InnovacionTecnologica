@@ -11,7 +11,7 @@ export default class extends React.Component {
         <>
         {this.props.respuestas.map(function(opcion, index, array){
             return (
-                <div key={index} onPress={()=>{_opcionElegida(index)}}>{opcion}</div>
+                <div key={index} onPress={()=>{opcionElegida(index)}}>{opcion}</div>
             );
         })}
         </>
