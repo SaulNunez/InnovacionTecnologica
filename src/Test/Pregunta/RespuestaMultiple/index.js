@@ -1,15 +1,17 @@
 import React from 'react';
 
 export default class extends React.Component {
-    _opcionElegida(){
-
+    opcionElegida(index){
+        if(this.props.onOptionSelected){
+            this.props.onOptionSelected(index);
+        }
     }
 
     render(){
         <>
         {this.props.respuestas.map(function(opcion, index, array){
             return (
-                <div key={index}>{opcion}</div>
+                <div key={index} onPress={()=>{_opcionElegida(index)}}>{opcion}</div>
             );
         })}
         </>

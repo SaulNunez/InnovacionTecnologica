@@ -2,9 +2,23 @@ import React from 'react';
 import { TextInput } from 'react-native';
 
 export default class RespuestaNum extends React.Component {
-    render(){
+    componentDidMount() {
+        this.mathTextInput.focus();
+    }
+
+    onAnswerSubmit() {
+
+    }
+
+    render() {
         <>
-        <TextInput keyboardType='numeric'/>
+            <TextInput keyboardType='numeric'
+                enablesReturnKeyAutomatically={true}
+                returnKeyType='done'
+                ref={this.mathTextInput}
+                onSubmitEditing={() => { onAnswerSubmit(); }}
+            />
+            <div onPress={() => { onAnswerSubmit(); }}>Next</div>
         </>
     }
 }

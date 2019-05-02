@@ -20,6 +20,10 @@ const AppNavigator = createStackNavigator({
   Configuracion: {
     screen: Configuracion
   }
-});
+},
+  {
+    initialRoute: "Start"
+  }
+);
 
 export default createAppContainer(AppNavigator);
