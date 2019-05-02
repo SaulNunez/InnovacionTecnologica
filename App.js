@@ -1,21 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Font } from 'expo';
+import { createAppContainer } from 'react-navigation';
+import { Inicio } from './src/Inicio';
+import { Configuracion } from './src/Configuracion';
+import { Test } from './src/Test';
+import { MejorPuntaje } from './src/MejorPuntaje';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const AppNavigator = createStackNavigator({
+  Start: {
+    screen: Inicio,
   },
+  Juego: {
+    screen: Test
+  },
+  Puntaje: {
+    screen: MejorPuntaje
+  },
+  Configuracion: {
+    screen: Configuracion
+  }
 });
+
+export default createAppContainer(AppNavigator);

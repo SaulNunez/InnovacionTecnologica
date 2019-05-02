@@ -4,7 +4,6 @@ import { View, ScrollView } from 'react-native';
 export default class MejorPuntaje extends React.Component {
     render(){
         <View>
-
             <ScrollView>
                 <div>
                     <p>Mejor puntaje</p>
