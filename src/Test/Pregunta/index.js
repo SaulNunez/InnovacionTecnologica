@@ -14,7 +14,7 @@ export default class Pregunta extends React.Component {
                     }
                 }
             }
-            {this.props.multiple ? <RespuestaMultiple preguntas={this.props.preguntas} /> : <RespuestaNum />}
+            {this.props.multiple ? <RespuestaMultiple preguntas={this.props.preguntas} onOptionSelected={(index) => {}}/> : <RespuestaNum onAnswerSubmit={(answer) => {}}/>}
         </div>
     }
 }
