@@ -2,12 +2,19 @@ import React from 'react';
 import { TextInput } from 'react-native';
 
 export default class RespuestaNum extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = { entrada: '' };
+    }
+
     componentDidMount() {
         this.mathTextInput.focus();
     }
 
     onAnswerSubmit() {
-
+        if(this.props.onAnswerSubmit){
+            this.props.onAnswerSubmit(this.state.entrada);
+        }
     }
 
     render() {
@@ -17,6 +24,7 @@ export default class RespuestaNum extends React.Component {
                 returnKeyType='done'
                 ref={this.mathTextInput}
                 onSubmitEditing={() => { onAnswerSubmit(); }}
+                onChangeText={(text) => this.setState({entrada : text})}
             />
             <div onPress={() => { onAnswerSubmit(); }}>Next</div>
         </>

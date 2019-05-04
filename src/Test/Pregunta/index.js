@@ -6,10 +6,15 @@ import { RespuestaNum } from './RespuestaNum';
 export default class Pregunta extends React.Component {
     render() {
         <div>
-            <p>Pregunta {this.props.numPregunta}</p>
             <p>{this.props.pregunta}</p>
-            <Image source={{ uri: this.props.imagen }} />
-            {this.props.multiple? <RespuestaMultiple preguntas={this.props.preguntas}/>: <RespuestaNum/>}
+            {
+                () => {
+                    if (this.props.imagen) {
+                        return (<Image source={{ uri: this.props.imagen }} />);
+                    }
+                }
+            }
+            {this.props.multiple ? <RespuestaMultiple preguntas={this.props.preguntas} /> : <RespuestaNum />}
         </div>
     }
 }
