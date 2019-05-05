@@ -2,22 +2,22 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Font } from 'expo';
 import { createAppContainer } from 'react-navigation';
-import { Inicio } from './src/Inicio';
+import { Start } from './src/Start';
 import { Configuracion } from './src/Configuracion';
 import { Test } from './src/Test';
 import { MejorPuntaje } from './src/MejorPuntaje';
 
 const AppNavigator = createStackNavigator({
   Start: {
-    screen: Inicio,
+    screen: Start    
   },
-  Juego: {
+  Test: {
     screen: Test
   },
-  Puntaje: {
+  Scoreboard: {
     screen: MejorPuntaje
   },
-  Configuracion: {
+  Settings: {
     screen: Configuracion
   }
 },

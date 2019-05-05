@@ -2,6 +2,10 @@ import React from 'react';
 import { View, ScrollView } from 'react-native';
 
 export default class MejorPuntaje extends React.Component {
+    static navigationOptions = {
+        title='Puntaje'
+    };
+    
     render(){
         <View>
             <ScrollView>
