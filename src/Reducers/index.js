@@ -2,23 +2,7 @@ import { combineReducers } from 'redux';
 import getTheoryQuestion from '../GetTheoryQuestion';
 import getPracticeQuestion from '../GetPracticeQuestion';
 import getDifficulty from '../Shared/Stats';
-
-export const QuestionType = {
-    THEORY: 'THEORY',
-    PRACTICE: 'PRACTICE'
-}
-
-export const ActionType = {
-    SECOND_PASSED: 'SECOND_PASSED',
-    QUESTION_ANSWERED: 'QUESTION_ANSWERED',
-    QUESTION_ANSWER_WRONG: 'QUESTION_ANSWER_WRONG',
-    QUESTION_ANSWER_RIGHT: 'QUESTION_ANSWER_RIGHT'
-}
-
-export const AppStates = {
-    QUESTION = 'question',
-    REVISION = 'revision'
-}
+import { QuestionType, ActionType, AppStates } from '../Reducers/types.js';
 
 function mode(state = {}, action) {
     if (action.setState === AppStates.QUESTION) {
@@ -42,12 +26,12 @@ function question(state = {}, action) {
     if (action.type === AppStates.QUESTION) {
         switch (Math.round(Math.random())) {
             case 0:
-                state.question = getTheoryQuestion();
-                state.questionType = QuestionType.THEORY;
+                state = getTheoryQuestion();
+                state.type = QuestionType.THEORY;
                 break;
             case 1:
-                state.question = getPracticeQuestion(Math.ceil(Math.random) * 5);
-                state.questionType = QuestionType.PRACTICE;
+                state = getPracticeQuestion(Math.ceil(Math.random) * 5);
+                state.type = QuestionType.PRACTICE;
                 break;
         }
     }
