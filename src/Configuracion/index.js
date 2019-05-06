@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 
 export default class Configuracion extends React.Component {
     static navigationOptions={
@@ -7,7 +7,8 @@ export default class Configuracion extends React.Component {
     };
 
     render() {
-        <View>
-        </View>
+        <ScrollView>
+            
+        </ScrollView>
     }
 }
