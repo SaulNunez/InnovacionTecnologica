@@ -1,8 +1,10 @@
 import React from 'react';
 import { KeyboardAvoidingView } from 'react-native';
 import * as Progress from 'react-native-progress';
+import Question from './Question';
 
-export default class Test extends React.Component {
+class Test extends React.Component {
+    //Para que aparezca el timer de la jugada
     static navigationOptions = {
         header: () => {
             return(<Progress.Bar 
@@ -15,12 +17,6 @@ export default class Test extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {
-            preguntasToDo: 10,
-            preguntasCorrectas: 0,
-            indicePregunta: 1,
-            tiempoRestantePregunta: Infinity
-        };
     }
 
     onComponentDidMount(){
@@ -29,7 +25,8 @@ export default class Test extends React.Component {
 
     render() {
         <KeyboardAvoidingView>
-            
+            <p>Pregunta {this.state.indicePregunta}</p>
+            <Question />
         </KeyboardAvoidingView>
     }
 }

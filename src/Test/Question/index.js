@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types'
 import React from 'react';
 import { Image } from 'react-native';
 import { RespuestaMultiple } from './RespuestaMultiple';
 import { RespuestaNum } from './RespuestaNum';
 
-export default class Pregunta extends React.Component {
+export default class Question extends React.Component {
     render() {
         <div>
             <p>{this.props.pregunta}</p>
@@ -18,3 +19,10 @@ export default class Pregunta extends React.Component {
         </div>
     }
 }
+
+
+Question.propTypes = {
+    pregunta: PropTypes.string.isRequired,
+    imagen: PropTypes.string,
+    multiple: PropTypes.arrayOf(PropTypes.string)
+};

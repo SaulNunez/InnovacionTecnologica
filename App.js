@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Font } from 'expo';
-import { createAppContainer } from 'react-navigation';
+import { AppContainer } from 'react-navigation';
 import { Start } from './src/Start';
 import { Configuracion } from './src/Configuracion';
 import { Test } from './src/Test';
@@ -26,4 +26,16 @@ const AppNavigator = createStackNavigator({
   }
 );
 
-export default createAppContainer(AppNavigator);
+export default class App extends React.Component{
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+    return(
+      <Provider store={}>
+        <AppNavigator />
+      </Provider>
+    );
+  }
+}

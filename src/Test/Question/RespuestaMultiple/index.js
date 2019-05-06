@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class extends React.Component {
+export default class RespuestaMultiple extends React.Component {
     opcionElegida(index){
         if(this.props.onOptionSelected){
             this.props.onOptionSelected(index);
@@ -17,3 +18,8 @@ export default class extends React.Component {
         </>
     }
 }
+
+RespuestaMultiple.propTypes= {
+    respuestas: PropTypes.arrayOf(PropTypes.string).isRequired,
+    onOptionSelected: PropTypes.func.isRequired
+};

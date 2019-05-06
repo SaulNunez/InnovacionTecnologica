@@ -1,6 +1,6 @@
-const preguntas = require('./preguntas_multiple.json.js.js');
+const preguntas = require('./preguntas_multiple.json.js');
 
-export default function ObtenerPregunta(){
+export default function getTheoryQuestion(){
     //1.-Obtenemos una respuesta random a preguntar
     //2.-Buscamos el indice donde esta la respuesta correcta y la guardamos para poderla buscar luego
     //3.-Mezclamos las repuesta

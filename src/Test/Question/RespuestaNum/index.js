@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextInput } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class RespuestaNum extends React.Component {
     constructor(props){
@@ -30,3 +31,7 @@ export default class RespuestaNum extends React.Component {
         </>
     }
 }
+
+RespuestaNum.propTypes = {
+    onAnswerSubmit: PropTypes.func
+};

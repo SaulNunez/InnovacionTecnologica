@@ -13,4 +13,3 @@ export default async function getDifficulty(){
 export async function purgeCurrentData(){
     await AsyncStorage.removeItem('points');
 }
-

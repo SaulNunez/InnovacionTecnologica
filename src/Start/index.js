@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import { View } from 'react-native';
 
 export default class Start extends React.Component {
