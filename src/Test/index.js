@@ -2,19 +2,24 @@ import React from 'react';
 import { KeyboardAvoidingView } from 'react-native';
 import * as Progress from 'react-native-progress';
 import Question from './Question';
-import { QuestionType } from '../Reducers/types.js';
+import { connect } from 'react-redux';
+import { TIME_FOR_ANSWERING_DEFAULT } from '../Reducers';
 
 class Test extends React.Component {
     //Para que aparezca el timer de la jugada
     static navigationOptions = {
         header: () => {
             return (<Progress.Bar
-                progress={this.state.indicePregunta / this.state.preguntasToDo}
+                progress={this.props.timeLeft.timeLeft / TIME_FOR_ANSWERING_DEFAULT}
                 animated={true}
                 width={null} />);
         },
         headerBackTitle: null
     };
+
+    componentDidMount(){
+        
+    }
 
     render() {
         <KeyboardAvoidingView>

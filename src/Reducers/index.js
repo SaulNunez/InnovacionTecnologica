@@ -4,6 +4,8 @@ import getPracticeQuestion from '../GetPracticeQuestion';
 import getDifficulty from '../Shared/Stats';
 import { QuestionType, ActionType, AppStates } from '../Reducers/types.js';
 
+export const TIME_FOR_ANSWERING_DEFAULT = 60;
+
 function mode(state = {}, action) {
     if (action.setState === AppStates.QUESTION) {
         state.mode = AppStates.QUESTION;
@@ -16,7 +18,7 @@ function mode(state = {}, action) {
 
 function answer(state = { correctAnswerCount: 0 }, action) {
     if (action.type === ActionType.QUESTION_ANSWER_RIGHT) {
-        state.correctAnswerCount++
+        state.correctAnswerCount++;
     }
 
     return state
@@ -39,16 +41,16 @@ function question(state = {}, action) {
     return state;
 }
 
-function timeLeft(state = { timeLeft: 60 }, action) {
+function timeLeft(state = { timeLeft: TIME_FOR_ANSWERING_DEFAULT }, action) {
     switch (action.type) {
         case ActionType.SECOND_PASSED:
-            timeLeft -= 1;
+            state.timeLeft -= 1;
             break;
         case ActionType.ANSWER_WRONG:
-            timeLeft -= 3;
+            state.timeLeft -= 3;
             break;
         case ActionType.ANSWER_RIGHT:
-            timeLeft += 3;
+            state.timeLeft += 3;
             break;
     }
 
