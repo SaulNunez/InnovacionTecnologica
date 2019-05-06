@@ -1,43 +1,53 @@
-import { createStore } from 'redux';
+import { combineReducers } from 'redux';
 import getTheoryQuestion from '../GetTheoryQuestion';
 import getPracticeQuestion from '../GetPracticeQuestion';
+import getDifficulty from '../Shared/Stats';
 
-const ActionType = {
-    THEORY: 'theory',
-    PRACTICE: 'practice',
-    SECOND_PASSED: 'second_passed',
-    QUESTION_ANSWERED: 'question_answered'
+export const QuestionType = {
+    THEORY: 'THEORY',
+    PRACTICE: 'PRACTICE'
 }
 
-const AppStates = {
+export const ActionType = {
+    SECOND_PASSED: 'SECOND_PASSED',
+    QUESTION_ANSWERED: 'QUESTION_ANSWERED',
+    QUESTION_ANSWER_WRONG: 'QUESTION_ANSWER_WRONG',
+    QUESTION_ANSWER_RIGHT: 'QUESTION_ANSWER_RIGHT'
+}
+
+export const AppStates = {
     QUESTION = 'question',
     REVISION = 'revision'
 }
 
-function isAnswerCorrect(){
-
-}
-
-function mode(state={}, action){
-    if(action.setState === AppStates.QUESTION){
+function mode(state = {}, action) {
+    if (action.setState === AppStates.QUESTION) {
         state.mode = AppStates.QUESTION;
-    } else if(action.setState === AppStates.REVISION){
+    } else if (action.setState === AppStates.REVISION) {
         state.mode = AppStates.REVISION;
     }
 
     return state;
 }
 
-function question(state={}, action){
-    if(action.type === AppStates.QUESTION){
-        switch(Math.round(Math.random())){
+function answer(state = { correctAnswerCount: 0 }, action) {
+    if (action.type === ActionType.QUESTION_ANSWER_RIGHT) {
+        state.correctAnswerCount++
+    }
+
+    return state
+}
+
+function question(state = {}, action) {
+    if (action.type === AppStates.QUESTION) {
+        switch (Math.round(Math.random())) {
             case 0:
                 state.question = getTheoryQuestion();
-                state.questionType= ActionType.THEORY;
+                state.questionType = QuestionType.THEORY;
                 break;
             case 1:
-                state.question = getPracticeQuestion();
-                state.questionType = ActionType.PRACTICE;
+                state.question = getPracticeQuestion(Math.ceil(Math.random) * 5);
+                state.questionType = QuestionType.PRACTICE;
                 break;
         }
     }
@@ -45,8 +55,8 @@ function question(state={}, action){
     return state;
 }
 
-function timeLeft(state={timeLeft:60}, action){
-    switch(action.type){
+function timeLeft(state = { timeLeft: 60 }, action) {
+    switch (action.type) {
         case ActionType.SECOND_PASSED:
             timeLeft -= 1;
             break;
@@ -61,38 +71,17 @@ function timeLeft(state={timeLeft:60}, action){
     return state;
 }
 
-function correctAnswers(state={}, action){
-    if(action.type === ){
-        
-    }
-}
-
-function questionAnswer(state = {}, action){
-    if(state.questionType === 'OPERACION_ARITMETICA'){
-        switch(action.operacion.adivinar){
-            case 'A':
-                if(action.operacion.a === respuestaUsuario){
-                    state.correctAnswerCount++;
-                }
-                break;
-            case 'B':
-                if(action.operacion.b === respuestaUsuario){
-                    state.correctAnswerCount++;
-                }
-                break;
-            case 'OPERADOR':
-                if(action.operacion.c == respuestaUsuario){
-                    state.correctAnswerCount++;
-                }
-                break;
-        }
-    } else if (state.questionType === 'OPCION_MULTIPLE'){
-        if(action.correctAnswer === action.givenAnswer){
-            state.correctAnswerCount++;
-        }
-    }
-
-    return state;
-}
-
-let store = createStore(questionAnswer);
+//const rootReducer: Reducer<{
+//    timeLeft: {
+//        timeLeft: number;
+//    };
+//    question: {};
+//    answer: {
+//        correctAnswerCount: number;
+//    };
+//    mode: {
+//    mode: String
+//    };
+//}, AnyAction>
+const rootReducer = combineReducers({ timeLeft, question, answer, mode });
+export default rootReducer;
