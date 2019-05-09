@@ -16,7 +16,7 @@ const GAME_MODE_REVISION = 'REVISION';
 const QUESTION_TYPE_THEORY = 'THEORY';
 const QUESTION_TYPE_PRACTICE = 'PRACTICE';
 
-class Test extends React.Component {
+export default class Test extends React.Component {
     //Para que aparezca el timer de la jugada
     static navigationOptions = {
         header: () => {
@@ -114,10 +114,3 @@ class Test extends React.Component {
         </KeyboardAvoidingView>
     }
 }
-
-const mapStateToProps = (state) => {
-    const { timeLeft, question, mode } = state;
-    return { timeLeft, question, mode };
-}
-
-export default connect(mapStateToProps)(Test);

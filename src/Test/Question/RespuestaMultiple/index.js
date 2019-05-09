@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-class RespuestaMultiple extends React.Component {
+export default class RespuestaMultiple extends React.Component {
     opcionElegida(index){
         if(this.props.onOptionSelected){
             this.props.onOptionSelected(index);
@@ -25,10 +25,3 @@ RespuestaMultiple.propTypes= {
     onOptionSelected: PropTypes.func.isRequired,
     correctIndex: PropTypes.number.isRequired
 };
-
-const mapStateToProps = (state) => {
-    const { timeLeft, question, mode } = state;
-    return { timeLeft, question, mode };
-}
-
-export default connect(mapStateToProps)(RespuestaMultiple);

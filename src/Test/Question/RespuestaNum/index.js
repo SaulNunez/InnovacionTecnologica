@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import store from '../../../Reducers';
 
-class RespuestaNum extends React.Component {
+export default class RespuestaNum extends React.Component {
     constructor(props){
         super(props);
         this.state = { entrada: '' , error: false};
@@ -47,11 +47,3 @@ RespuestaNum.propTypes = {
     correctAnswer: PropTypes.string.isRequired,
     onAnswerGiven: PropTypes.func.isRequired
 };
-
-
-const mapStateToProps = (state) => {
-    const { timeLeft, question, mode } = state;
-    return { timeLeft, question, mode };
-}
-
-export default connect(mapStateToProps)(RespuestaNum);
