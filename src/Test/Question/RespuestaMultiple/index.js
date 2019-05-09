@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 export default class RespuestaMultiple extends React.Component {
     opcionElegida(index){
         if(this.props.onOptionSelected){
-            this.props.onOptionSelected(index);
+            const isRight = index === this.props.question.correctIndex;
+            this.props.onOptionSelected(isRight);
         }
     }
 
     render(){
         <>
-        {this.props.respuestas.map(function(opcion, index, array){
+        {this.props.question.answers.map(function(opcion, index, array){
             return (
                 <div key={index} onPress={()=>{opcionElegida(index)}}>{opcion}</div>
             );
@@ -21,7 +22,6 @@ export default class RespuestaMultiple extends React.Component {
 }
 
 RespuestaMultiple.propTypes= {
-    respuestas: PropTypes.arrayOf(PropTypes.string).isRequired,
+    question: PropTypes.object.isRequired,
     onOptionSelected: PropTypes.func.isRequired,
-    correctIndex: PropTypes.number.isRequired
 };

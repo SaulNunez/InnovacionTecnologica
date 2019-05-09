@@ -102,7 +102,7 @@ export default class Test extends React.Component {
                     case QUESTION_TYPE_THEORY:
                         return (
                             <>
-                                <RespuestaMultiple respuestas={this.state.question.question} correctIndex={this.state.question.correctIndex} onOptionSelected={(right) => { }} />
+                                <RespuestaMultiple question={this.state.question} onOptionSelected={(right) => { }} />
                             </>
                         );
                         break;
