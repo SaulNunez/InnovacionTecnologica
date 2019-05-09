@@ -1,8 +1,6 @@
 import React from 'react';
 import { TextInput } from 'react-native';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import store from '../../../Reducers';
 
 export default class RespuestaNum extends React.Component {
     constructor(props){
@@ -14,19 +12,15 @@ export default class RespuestaNum extends React.Component {
         this.mathTextInput.focus();
     }
 
-    onAnswerSubmit() {
-        //Primero revisamos si la respuesta fue la correcta
-        //Segundo, cambiamos los estilos de los elementos y cambiamos estados locales
-        //Tercero, ponemos timeout para cambiar a la sig. pregunta
-        if(entrada.trim() === this.props.correctAnswer){
-            //Añadir respuesta correcta
-        } else {
+    onAnswerSubmit() {     
+        const isRight = entrada.trim() == this.props.correctAnswer
+        if(!isRight){
             this.setState({error: true});
         }
 
-        setTimeout(() => {
-            store.dispatch();
-        }, 3000);
+        if(this.props.onAnswerGiven){
+            this.props.onAnswerGiven(isRight);
+        }
     }
 
     render() {
