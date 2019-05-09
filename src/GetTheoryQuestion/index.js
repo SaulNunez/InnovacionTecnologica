@@ -1,4 +1,4 @@
-const preguntas = require('./preguntas_multiple.json');
+const questions = require('./preguntas_multiple.json');
 
 export default function getTheoryQuestion(){
     //1.-Obtenemos una respuesta random a preguntar
@@ -6,13 +6,13 @@ export default function getTheoryQuestion(){
     //3.-Mezclamos las repuesta
     //4.-Buscamos donde se quedo la respuesta correcta
 
-    let pregunta = preguntas[Math.floor(Math.random() * preguntas.length)];
-    const respuestaCorrecta = pregunta.respuestas[pregunta.respuestaCorrecta];
-    pregunta.respuestas.sort(()=> Math.random() - 0.5);
-    pregunta.respuestaCorrecta = pregunta.respuestas.findIndex((elemento) => elemento === respuestaCorrecta);
-    if(pregunta.respuestaCorrecta === -1){
+    let question = questions[Math.floor(Math.random() * questions.length)];
+    const respuestaCorrecta = question.respuestas[question.respuestaCorrecta];
+    question.respuestas.sort(()=> Math.random() - 0.5);
+    question.respuestaCorrecta = question.respuestas.findIndex((elemento) => elemento === respuestaCorrecta);
+    if(question.respuestaCorrecta === -1){
         throw new Error('Algo paso y no pudimos encontrar la respuesta correcta');
     }
 
-    return pregunta;
+    return question;
 }

@@ -6,6 +6,7 @@ import { Start } from './src/Start';
 import { Configuracion } from './src/Configuracion';
 import { Test } from './src/Test';
 import { MejorPuntaje } from './src/MejorPuntaje';
+import store from './src/Reducers';
 
 const AppNavigator = createStackNavigator({
   Start: {
@@ -33,7 +34,7 @@ export default class App extends React.Component{
 
   render(){
     return(
-      <Provider store={}>
+      <Provider store={store}>
         <AppNavigator />
       </Provider>
     );

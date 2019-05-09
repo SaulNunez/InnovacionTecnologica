@@ -1,32 +1,32 @@
 [
     {
-        "pregunta": "sdlkjdsalksdflk",
-        "respuestas": [
+        "question": "sdlkjdsalksdflk",
+        "answers": [
             "",
             "",
             "",
             ""
         ],
-        "respuestaCorrecta": 2
+        "correctIndex": 2
     },
     {
-        "pregunta": "sdlkjdsalksdflk",
-        "respuestas": [
+        "question": "sdlkjdsalksdflk",
+        "answers": [
             "",
             "",
             "",
             ""
         ],
-        "respuestaCorrecta": 2
+        "correctIndex": 2
     },
     {
-        "pregunta": "sdlkjdsalksdflk",
-        "respuestas": [
+        "question": "sdlkjdsalksdflk",
+        "answers": [
             "",
             "",
             "",
             ""
         ],
-        "respuestaCorrecta": 2
+        "correctIndex": 2
     }
 ]

@@ -2,11 +2,12 @@ import React from 'react';
 import { TextInput } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import store from '../../../Reducers';
 
 class RespuestaNum extends React.Component {
     constructor(props){
         super(props);
-        this.state = { entrada: '' };
+        this.state = { entrada: '' , error: false};
     }
 
     componentDidMount() {
@@ -14,9 +15,18 @@ class RespuestaNum extends React.Component {
     }
 
     onAnswerSubmit() {
-        if(this.props.onAnswerSubmit){
-            this.props.onAnswerSubmit(this.state.entrada);
+        //Primero revisamos si la respuesta fue la correcta
+        //Segundo, cambiamos los estilos de los elementos y cambiamos estados locales
+        //Tercero, ponemos timeout para cambiar a la sig. pregunta
+        if(entrada.trim() === this.props.correctAnswer){
+            //Añadir respuesta correcta
+        } else {
+            this.setState({error: true});
         }
+
+        setTimeout(() => {
+            store.dispatch();
+        }, 3000);
     }
 
     render() {
@@ -28,13 +38,14 @@ class RespuestaNum extends React.Component {
                 onSubmitEditing={() => { onAnswerSubmit(); }}
                 onChangeText={(text) => this.setState({entrada : text})}
             />
-            <div onPress={() => { onAnswerSubmit(); }}>Next</div>
+            <div onPress={() => { onAnswerSubmit(); }}>Siguiente</div>
         </>
     }
 }
 
 RespuestaNum.propTypes = {
-    onAnswerSubmit: PropTypes.func
+    correctAnswer: PropTypes.string.isRequired,
+    onAnswerGiven: PropTypes.func.isRequired
 };
 
 

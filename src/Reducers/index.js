@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers, createStore } from 'redux';
 import getTheoryQuestion from '../GetTheoryQuestion';
 import getPracticeQuestion from '../GetPracticeQuestion';
 import getDifficulty from '../Shared/Stats';
@@ -70,4 +70,5 @@ function timeLeft(state = { timeLeft: TIME_FOR_ANSWERING_DEFAULT }, action) {
 //    };
 //}, AnyAction>
 const rootReducer = combineReducers({ timeLeft, question, answer, mode });
-export default rootReducer;
+const store = createStore(rootReducer);
+export default store;

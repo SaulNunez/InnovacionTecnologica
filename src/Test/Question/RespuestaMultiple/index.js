@@ -22,7 +22,8 @@ class RespuestaMultiple extends React.Component {
 
 RespuestaMultiple.propTypes= {
     respuestas: PropTypes.arrayOf(PropTypes.string).isRequired,
-    onOptionSelected: PropTypes.func.isRequired
+    onOptionSelected: PropTypes.func.isRequired,
+    correctIndex: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => {
