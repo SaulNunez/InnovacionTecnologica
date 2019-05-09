@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Touchable from 'react-native-platform-touchable';
 
 export default class RespuestaMultiple extends React.Component {
     opcionElegida(index){
@@ -13,7 +14,9 @@ export default class RespuestaMultiple extends React.Component {
         <>
         {this.props.question.answers.map(function(opcion, index, array){
             return (
-                <div key={index} onPress={()=>{opcionElegida(index)}}>{opcion}</div>
+                <Touchable key={index} onPress={()=>{opcionElegida(index)}}>
+                    <div>{opcion}</div>
+                </Touchable>
             );
         })}
         </>

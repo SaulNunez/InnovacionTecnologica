@@ -1,7 +1,6 @@
 import React from 'react';
-import { KeyboardAvoidingView } from 'react-native';
+import { KeyboardAvoidingView, Alert } from 'react-native';
 import * as Progress from 'react-native-progress';
-import Question from './Question';
 import { Audio } from 'expo';
 import getPracticeQuestion from '../GetPracticeQuestion';
 import getTheoryQuestion from '../GetTheoryQuestion';
@@ -38,7 +37,8 @@ export default class Test extends React.Component {
             correctAnswerCount: 0,
             questionNumber: 1,
             timeLeft: MAX_AVAILABLE_TIME,
-            questionType: ''
+            questionType: '',
+            end: false
         }
     }
 
@@ -48,7 +48,9 @@ export default class Test extends React.Component {
         //Javascript tiene valores falsy (o sea valores que puede usar implicitamente como booleanos)
         //Estoy usando un número random (que creo que no es imparcial, puede irse mas a un lado que a otro)
         //Y de ello obteniendo un valor 0 o 1 que espero que pueda usar como true o false
-        this.setState({ question: Math.round(Math.random()) ? getTheoryQuestion() : getPracticeQuestion(difficultyLevel) });
+        let getTheoryQuestion = Math.round(Math.random());
+        this.setState({ question: getTheoryQuestion? getTheoryQuestion() : getPracticeQuestion(difficultyLevel),
+                        questionType: getTheoryQuestion? QUESTION_TYPE_THEORY: QUESTION_TYPE_PRACTICE });
     }
 
     componentDidMount() {
@@ -70,13 +72,18 @@ export default class Test extends React.Component {
         setInterval(() => {
             this.setState({ timeLeft: this.state.timeLeft - 1 });
             if (this.state.timeLeft > 0) {
-                mode: GAME_MODE_REVISION
+                this.setState({mode: GAME_MODE_REVISION, end: true});
+
+                setTimeout(()=>{
+                    onEndGame();
+                }, 1000);
             }
         }, 1000);
     }
 
     onQuestionAnswered(isRight) {
         this.setState({ questionNumber: questionNumber + 1 });
+        this.setState({ mode: GAME_MODE_REVISION});
 
         if (isRight) {
             this.setState({ correctAnswerCount: this.state.correctAnswerCount + 1 });
@@ -88,7 +95,16 @@ export default class Test extends React.Component {
 
         setTimeout(() => {
             getNewQuestion();
-        }, 3600);
+            this.setState({ mode: GAME_MODE_QUESTION});
+        }, 2600);
+    }
+
+    onEndGame(){
+        Alert.alert('Nivel superado!',
+         `Pasaste el nivel con ${this.state.correctAnswerCount} de ${this.state.questionNumber}`,
+         [{text:'OK', onPress: ()=> {
+             this.props.navigation.popToTop();
+         }}]);
     }
 
     render() {
