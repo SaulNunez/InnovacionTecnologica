@@ -1,6 +1,6 @@
 import React from 'react';
-import { ScrollView, Text } from 'react-native';
-import {Slider} from 'expo';
+import { ScrollView, Text, Slider } from 'react-native';
+
 
 export default class Configuracion extends React.Component {
     static navigationOptions={

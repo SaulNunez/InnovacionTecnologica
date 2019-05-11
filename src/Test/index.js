@@ -42,7 +42,7 @@ export default class Test extends React.Component {
 
         this.state = {
             mode: GAME_MODE_QUESTION,
-            question: null,
+            question: getNewQuestion(),
             difficultyLevel: 0,
             correctAnswerCount: 0,
             questionNumber: 1,
