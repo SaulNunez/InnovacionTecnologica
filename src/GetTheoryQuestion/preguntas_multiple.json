@@ -1,32 +1,247 @@
 [
     {
-        "question": "sdlkjdsalksdflk",
+        "question": "¿Cual es el dominio de una función?",
         "answers": [
-            "",
-            "",
-            "",
-            ""
+            "Conjunto de todos los valores independientes por los cuales la función está definida",
+            "Conjunto de todos los valores dependientes por los cuales la función está definida",
+            "Conjunto de todos los valores independientes por los cuales la función está indefinida",
+            "Someter a una persona a tu voluntad"
         ],
-        "correctIndex": 2
+        "correctIndex": 1
     },
     {
-        "question": "sdlkjdsalksdflk",
+        "question": "¿Cual es el rango de una función?",
         "answers": [
-            "",
-            "",
-            "",
-            ""
+            "Conjunto de todos los valores reales que puede llegar a tomar la función",
+            "Conjunto de todos los valores independientes por los cuales la función está definida",
+            "Conjunto de todos los valores independientes por los cuales la función está indefinida",
+            "Conjunto de todos los valores imaginarios que puede llegar a tomar la función"
         ],
-        "correctIndex": 2
+        "correctIndex": 1
     },
     {
-        "question": "sdlkjdsalksdflk",
+        "question": "¿Cómo se llaman los triángulos con dos lados iguales y uno desigual?",
         "answers": [
-            "",
-            "",
-            "",
-            ""
+            "Isósceles",
+            "Escaleno",
+            "Equílatero",
+            "Acutángulo",
+            "Obtusángulo",
+            "Rectángulo"
         ],
-        "correctIndex": 2
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Cómo se llaman los triángulos con todos sus lados iguales?",
+        "answers": [
+            "Equílatero",
+            "Isósceles",
+            "Escaleno",
+            "Acutángulo",
+            "Obtusángulo",
+            "Rectángulo"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Cómo se llaman los triángulos con todos sus lados desiguales?",
+        "answers": [
+            "Escaleno",
+            "Isósceles",
+            "Equilátero",
+            "Acutángulo",
+            "Obtusángulo",
+            "Rectángulo"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Cómo se llaman los triángulos con sus tres ángulos agudos?",
+        "answers": [
+            "Acutángulo",
+            "Isósceles",
+            "Equilátero",
+            "Escaleno",
+            "Obtusángulo",
+            "Rectángulo"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Qué es un sistema de ecuación lineal?",
+        "answers": [
+            "Es un conjunto de ecuaciones de primer grado",
+            "Es un conjunto de ecuaciones de cualquier grado",
+            "Es un conjunto de ecuaciones de segundo grado",
+            "Es un conjunto de ecuaciones elevadas a 0"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Cuándo un sistema lineal es indeterminado?",
+        "answers": [
+            "Cuando tiene múltiples soluciones",
+            "Cuando tiene una solución",
+            "Cuando no tiene solución",
+            "Cuando no se entiende"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "Una función lineal es comprendida por la fórmula",
+        "answers": [
+            "y = mx + b",
+            "y = mx",
+            "x = my + b",
+            "y = x + b"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Cual es la sucesión de Fibonacci?",
+        "answers": [
+            "Es una sucesión donde cada número está definido por la suma de los dos anteriores",
+            "Es una sucesión donde cada número está definido por la suma de los dos siguientes",
+            "Es una sucesión donde cada número está definido por la resta de los dos anteriores",
+            "Es una sucesión donde cada número está definido por la suma de los tres anteriores"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Cómo se llama el número superior de una fracción?",
+        "answers": [
+            "Numerador",
+            "Denominador",
+            "Dividendo",
+            "Divisor"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Qué es una fracción impropia?",
+        "answers": [
+            "Fracción donde el numerador es mayor que el denominador",
+            "Fracción donde el numerador es menor que el denominador",
+            "Fracción donde el denominador es mayor que el numerador",
+            "Fracción donde el numerador es igual que el denominador"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Qué es una fracción propia?",
+        "answers": [
+            "Fracción donde el denominador es mayor que el numerador",
+            "Fracción donde el numerador es mayor que el denominador",
+            "Fracción donde el denominador es menor que el numerador",
+            "Fracción donde el numerador es igual que el denominador"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Qué número representa las centenas en 9836.574?",
+        "answers": [
+            "8",
+            "3",
+            "5",
+            "9"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Qué número representa la décimas en 638.29?",
+        "answers": [
+            "2",
+            "9",
+            "3",
+            "8"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Qué es un polígono?",
+        "answers": [
+            "Es una figura geométrica compuesta por tres o más líneas, que crean una figura cerrada",
+            "Es una figura geométrica compuesta por dos o más líneas, que crean una figura cerrada",
+            "Es una figura geométrica compuesta por tres o más líneas, que crean una figura",
+            "Es una figura geométrica compuesta por una o más líneas, que crean una figura cerrada"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Cómo se le llama al resultado de una multiplicación?",
+        "answers": [
+            "Producto",
+            "Elemento",
+            "Multiplicando",
+            "Multiplicador"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "La suma de los lados de una figura geométrica plana es…",
+        "answers": [
+            "Perímetro",
+            "Área",
+            "Volumen"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "La extensión de una superficie de una figura geométrica plana es…",
+        "answers": [
+            "Área",
+            "Volumen",
+            "Perímetro",
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "La extensión de espacio tridimensional de una figura geométrica tridimensional es…",
+        "answers": [
+            "Volumen",
+            "Área",
+            "Perímetro"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Cual es la suma de los ángulos de un triángulo?",
+        "answers": [
+            "180 grados",
+            "360 grados",
+            "30 grados",
+            "Depende del triángulo"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Cual es la suma de los ángulos de un cuadrilátero?",
+        "answers": [
+            "360 grados",
+            "180 grados",
+            "40 grados",
+            "Depende del triángulo"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Cómo se representa el cero en Romano?",
+        "answers": [
+            "No existe",
+            "0",
+            "O",
+            "C"
+        ],
+        "correctIndex": 1
+    },
+    {
+        "question": "¿Cuáles son los números primos?",
+        "answers": [
+            "Son los números que tienen únicamente dos divisores distintos",
+            "Son los números que tienen únicamente tres divisores distintos",
+            "Son los números que tienen únicamente 1 divisor",
+            "Son los números que sus papás son hermanos"
+        ],
+        "correctIndex": 1
     }
 ]
