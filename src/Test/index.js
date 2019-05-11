@@ -1,5 +1,5 @@
 import React from 'react';
-import { KeyboardAvoidingView, Alert, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, Alert, StyleSheet, Text } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { Audio } from 'expo';
 import getPracticeQuestion from '../GetPracticeQuestion';
@@ -30,7 +30,7 @@ export default class Test extends React.Component {
     static navigationOptions = {
         header: () => {
             return (<Progress.Bar
-                progress={this.state.timeLeft / MAX_AVAILABLE_TIME}
+                progress={100 / MAX_AVAILABLE_TIME}
                 animated={true}
                 width={null} />);
         },
@@ -46,7 +46,7 @@ export default class Test extends React.Component {
             difficultyLevel: 0,
             correctAnswerCount: 0,
             questionNumber: 1,
-            timeLeft: MAX_AVAILABLE_TIME,
+            timeLeft: 100,
             questionType: '',
             end: false
         }
