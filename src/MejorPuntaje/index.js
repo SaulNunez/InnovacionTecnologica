@@ -1,24 +1,26 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 
 export default class MejorPuntaje extends React.Component {
     static navigationOptions = {
-        title='Puntaje'
+        title:'Puntaje'
     };
     
     render(){
+        return(
         <View>
             <ScrollView>
                 <div>
-                    <p>Mejor puntaje</p>
-                    <p>N/a</p>
+                    <Text>Mejor puntaje</Text>
+                    <Text>N/a</Text>
 
                     <div>
-                        <p>Sesion 12:34</p>
-                        <p>Puntaje: N/a</p>
+                        <Text>Sesion 12:34</Text>
+                        <Text>Puntaje: N/a</Text>
                     </div>
                 </div>
             </ScrollView>
         </View>
+        );
     }
 }
