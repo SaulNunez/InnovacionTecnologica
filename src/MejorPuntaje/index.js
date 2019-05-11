@@ -10,15 +10,15 @@ export default class MejorPuntaje extends React.Component {
         return(
         <View>
             <ScrollView>
-                <div>
+                <View>
                     <Text>Mejor puntaje</Text>
                     <Text>N/a</Text>
 
-                    <div>
+                    <View>
                         <Text>Sesion 12:34</Text>
                         <Text>Puntaje: N/a</Text>
-                    </div>
-                </div>
+                    </View>
+                </View>
             </ScrollView>
         </View>
         );
