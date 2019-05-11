@@ -18,4 +18,23 @@ const AppNavigator = createStackNavigator({
   }
 );
 
-export default createAppContainer(AppNavigator);
+const AppContainer = createAppContainer(AppNavigator);
+
+export default class App extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state= {fontLoaded: false};
+  }
+  async componentDidMount(){
+    await Font.loadAsync({
+      'Lato-Regular': require('./assets/fonts/lato/Lato-Regular.ttf'),
+      'yikes_medium': require('./assets/fonts/yikes/Yikes_medium.ttf'),
+    });
+    this.setState({fontLoaded: true})
+  }
+
+  render(){
+    return (<AppContainer />);
+  }
+}

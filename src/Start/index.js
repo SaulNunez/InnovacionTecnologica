@@ -1,8 +1,7 @@
 import React, { PropTypes, } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import  Touchable from 'react-native-platform-touchable';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import Touchable from 'react-native-platform-touchable';
 import * as Animatable from 'react-native-animatable';
-import base from '../styles.js';
 
 const styles = StyleSheet.create({
     bigBoi: {
@@ -11,9 +10,8 @@ const styles = StyleSheet.create({
         marginTop: 64,
         marginBottom: 64
     },
-    normal: {
-        fontSize: 16,
-        textAlign: 'center'
+    buttonText: {
+        fontSize: 24,
     },
     centeredView: {
         justifyContent: 'center',
@@ -21,15 +19,14 @@ const styles = StyleSheet.create({
         width:'100%'
     },
     button: {
-        borderWidth: 4,
+        borderWidth: 2,
         borderStyle:'solid',
-        width:'100%',
-        backgroundColor: '#0000ff',
+        backgroundColor: 'yellow',
         borderColor: '#000000',
-        margin: 16,
-        paddingVertical: 30,
-        paddingHorizontal: 80,
+        marginVertical: 16,
+        padding: 16,
         minHeight: 48,
+        textAlign: 'center',
     }
 });
 
@@ -48,14 +45,15 @@ export default class Start extends React.Component {
         <View style={styles.centeredView}>
             <Animatable.Text animation="pulse" easing="ease-out" iterationCount="infinite" style={styles.bigBoi}>Aprender Matemáticas</Animatable.Text>
             <View>
-                <Touchable onPress={() => this.props.navigation.navigate('Test')} styles={styles.button}>
-                    <Text style={styles.normal}>Iniciar juego</Text>
+                <Touchable onPress={() => this.props.navigation.navigate('Test')} background={Touchable.Ripple('blue')}>
+                    <Text style={styles.button || styles.buttonText}>Iniciar juego</Text>
                 </Touchable>
-                <Touchable onPress={() => this.props.navigation.navigate('Scoreboard')} styles={styles.button}>
-                    <Text style={styles.normal}>Mejor puntaje</Text>
+                
+                <Touchable onPress={() => this.props.navigation.navigate('Scoreboard')}>
+                    <Text style={styles.button || styles.buttonText}>Mejor puntaje</Text>
                 </Touchable>
-                <Touchable onPress={() => this.props.navigation.navigate('Settings')} styles={styles.button}>
-                    <Text style={styles.normal}>Configuración</Text>
+                <Touchable onPress={() => this.props.navigation.navigate('Settings')}>
+                    <Text style={styles.button || styles.buttonText}>Configuración</Text>
                 </Touchable>
             </View>
         </View>
