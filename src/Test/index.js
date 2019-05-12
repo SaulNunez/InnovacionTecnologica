@@ -92,7 +92,7 @@ export default class Test extends React.Component {
         clearInterval(this.timeout);
     }
 
-    onQuestionAnswered(isRight) {
+    _onQuestionAnswered(isRight) {
         this.setState({ questionNumber: questionNumber + 1 });
         this.setState({ mode: GAME_MODE_REVISION });
 
@@ -122,8 +122,8 @@ export default class Test extends React.Component {
                     this.state.question.question :
                     this.state.question.a + this.state.question.operator + this.state.question.b}</Text>
                 {
-                    this.state.questionType === QUESTION_TYPE_THEORY? <RespuestaMultiple question={this.state.question} onOptionSelected={(right) => { }} />
-                    : <RespuestaNum correctAnswer={this.state.question.result} onAnswerGiven={(right) => { }} />
+                    this.state.questionType === QUESTION_TYPE_THEORY? <RespuestaMultiple question={this.state.question} onOptionSelected={(right) => { this.onQuestionAnswered(right) }} />
+                    : <RespuestaNum correctAnswer={this.state.question.result} onAnswerGiven={(right) => { this.onQuestionAnswered(right) }} />
                 }
             </KeyboardAvoidingView>
         );

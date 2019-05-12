@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, StyleSheet } from 'react-native';
+import { TextInput, StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import Touchable from 'react-native-platform-touchable';
 
@@ -39,7 +39,9 @@ export default class RespuestaNum extends React.Component {
     }
 
     componentDidMount() {
-        this.mathTextInput.focus();
+        if(this.mathTextInput){
+            this.mathTextInput.focus();
+        }
     }
 
     onAnswerSubmit() {
