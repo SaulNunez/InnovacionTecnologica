@@ -73,6 +73,8 @@ export default class RespuestaMultiple extends React.Component {
         if(props.question.question != state.question.question && state.indexSelected === -1){
             return { indexSelected: -1 };
         }
+
+        return null;
     }
 }
 

@@ -5,7 +5,7 @@ import { Audio } from 'expo';
 import RespuestaMultiple from './Question/RespuestaMultiple';
 import RespuestaNum from './Question/RespuestaNum';
 import getNewQuestion, { QUESTION_TYPE_PRACTICE, QUESTION_TYPE_THEORY } from '../GetQuestion';
-import getDifficulty from '../Shared/Stats';
+import getDifficulty, {setDifficulty, updateStatistics} from '../Shared/Stats';
 
 
 const MAX_AVAILABLE_TIME = 100;
@@ -87,6 +87,8 @@ export default class Test extends React.Component {
 
     componentWillUnmount() {
         clearInterval(this.timeout);
+        updateStatistics(this.state.correctAnswerCount);
+        setDifficulty(this.state.difficultyLevel);
     }
 
     _onQuestionAnswered(isRight) {
@@ -119,9 +121,10 @@ export default class Test extends React.Component {
                     animated={true}
                     width={null} />
                 <Text style={styles.questionNumber}>Pregunta {this.state.questionNumber}</Text>
+                <Text>Correctas - {this.state.correctAnswerCount}</Text>
                 <Text style={styles.questionTitle}>{this.state.questionType == QUESTION_TYPE_THEORY ?
                     this.state.question.question :
-                    this.state.question.a.toString() + this.state.question.operator + this.state.question.b.toString()}</Text>
+                    `${this.state.question.a} ${this.state.operator.toString()} ${this.state.question.b}`}</Text>
                 {
                     //Tal vez te preguntes porque las keys
                     //Es un patron de React donde hay comportamiento del que tiene propiedad el componente
