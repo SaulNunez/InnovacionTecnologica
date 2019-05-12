@@ -2,18 +2,17 @@ import React from 'react';
 import { KeyboardAvoidingView, Alert, StyleSheet, Text } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { Audio } from 'expo';
-import getPracticeQuestion from '../GetPracticeQuestion';
-import getTheoryQuestion from '../GetTheoryQuestion';
 import RespuestaMultiple from './Question/RespuestaMultiple';
 import RespuestaNum from './Question/RespuestaNum';
+import getNewQuestion, { QUESTION_TYPE_PRACTICE, QUESTION_TYPE_THEORY } from '../GetQuestion';
+import getDifficulty from '../Shared/Stats';
 
 
 const MAX_AVAILABLE_TIME = 100;
 const GAME_MODE_QUESTION = 'QUESTION';
 const GAME_MODE_REVISION = 'REVISION';
 
-const QUESTION_TYPE_THEORY = 'THEORY';
-const QUESTION_TYPE_PRACTICE = 'PRACTICE';
+
 
 const styles = StyleSheet.create({
     questionNumber: {
@@ -40,29 +39,19 @@ export default class Test extends React.Component {
     constructor(props) {
         super(props);
 
+        const question = getNewQuestion(getDifficulty());
+        console.log(question);
+
         this.state = {
             mode: GAME_MODE_QUESTION,
-            question: getNewQuestion(),
+            question: question.question,
             difficultyLevel: 0,
             correctAnswerCount: 0,
             questionNumber: 1,
             timeLeft: 100,
-            questionType: '',
+            questionType: question.questionType,
             end: false
         }
-    }
-
-    getNewQuestion() {
-        //Obteniendo una pregunta random
-        //MAGIA NEGRA-----
-        //Javascript tiene valores falsy (o sea valores que puede usar implicitamente como booleanos)
-        //Estoy usando un número random (que creo que no es imparcial, puede irse mas a un lado que a otro)
-        //Y de ello obteniendo un valor 0 o 1 que espero que pueda usar como true o false
-        let getTheoryQuestion = Math.round(Math.random());
-        this.setState({
-            question: getTheoryQuestion ? getTheoryQuestion() : getPracticeQuestion(difficultyLevel),
-            questionType: getTheoryQuestion ? QUESTION_TYPE_THEORY : QUESTION_TYPE_PRACTICE
-        });
     }
 
     componentDidMount() {
@@ -84,16 +73,28 @@ export default class Test extends React.Component {
         initSounds();
 
         //Contador de la partida, cuando llegue a cero, se acaba
-        setInterval(() => {
+        this.timeout = setInterval(() => {
             this.setState({ timeLeft: this.state.timeLeft - 1 });
-            if (this.state.timeLeft > 0) {
+            if (this.state.timeLeft <= 0) {
                 this.setState({ mode: GAME_MODE_REVISION, end: true });
 
-                setTimeout(() => {
-                    onEndGame();
-                }, 1000);
+                if(this.state.end){
+                    setTimeout(() => {
+                        Alert.alert('Nivel superado!',
+                            `Pasaste el nivel con ${this.state.correctAnswerCount} de ${this.state.questionNumber}`,
+                            [{
+                                text: 'OK', onPress: () => {
+                                    this.props.navigation.popToTop();
+                                }
+                            }]);
+                    }, 1000);
+                }
             }
         }, 1000);
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.timeout);
     }
 
     onQuestionAnswered(isRight) {
@@ -109,45 +110,27 @@ export default class Test extends React.Component {
         }
 
         setTimeout(() => {
-            getNewQuestion();
-            this.setState({ mode: GAME_MODE_QUESTION });
+            const newQuestion = getNewQuestion(this.state.difficultyLevel);
+            this.setState({
+                mode: GAME_MODE_QUESTION,
+                question: newQuestion.question,
+                questionType: newQuestion.questionType
+            });
         }, 2600);
     }
 
-    onEndGame() {
-        Alert.alert('Nivel superado!',
-            `Pasaste el nivel con ${this.state.correctAnswerCount} de ${this.state.questionNumber}`,
-            [{
-                text: 'OK', onPress: () => {
-                    this.props.navigation.popToTop();
-                }
-            }]);
-    }
-
     render() {
-        <KeyboardAvoidingView>
-            <Text style={styles.questionNumber}>Pregunta {this.state.indicePregunta}</Text>
-            <Text style={styles.questionTitle}>{this.state.questionType == QUESTION_TYPE_THEORY ?
-                this.state.question.pregunta :
-                this.state.question.a + this.state.question.operator + this.state.question.b}</Text>
-            {() => {
-                switch (this.state.questionType) {
-                    case QUESTION_TYPE_THEORY:
-                        return (
-                            <>
-                                <RespuestaMultiple question={this.state.question} onOptionSelected={(right) => { }} />
-                            </>
-                        );
-                        break;
-                    case QUESTION_TYPE_PRACTICE:
-                        return (
-                            <>
-                                <RespuestaNum correctAnswer={this.state.question.result} onAnswerGiven={(right) => { }} />
-                            </>
-                        );
-                        break;
+        return (
+            <KeyboardAvoidingView>
+                <Text style={styles.questionNumber}>Pregunta {this.state.indicePregunta}</Text>
+                <Text style={styles.questionTitle}>{this.state.questionType == QUESTION_TYPE_THEORY ?
+                    this.state.question.pregunta :
+                    this.state.question.a + this.state.question.operator + this.state.question.b}</Text>
+                {
+                    this.state.questionType === QUESTION_TYPE_THEORY? <RespuestaMultiple question={this.state.question} onOptionSelected={(right) => { }} />
+                    : <RespuestaNum correctAnswer={this.state.question.result} onAnswerGiven={(right) => { }} />
                 }
-            }}
-        </KeyboardAvoidingView>
+            </KeyboardAvoidingView>
+        );
     }
 }

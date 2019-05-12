@@ -1,3 +1,5 @@
+import { AsyncStorage } from "react-native";
+
 export async function setDifficulty(level){
     await AsyncStorage.setItem('points', level);
 }

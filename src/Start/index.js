@@ -10,9 +10,6 @@ const styles = StyleSheet.create({
         marginTop: 64,
         marginBottom: 64
     },
-    buttonText: {
-        fontSize: 24,
-    },
     centeredView: {
         justifyContent: 'center',
         alignItems: 'center',
@@ -27,6 +24,7 @@ const styles = StyleSheet.create({
         padding: 16,
         minHeight: 48,
         textAlign: 'center',
+        fontSize: 24,
     }
 });
 
@@ -45,15 +43,15 @@ export default class Start extends React.Component {
         <View style={styles.centeredView}>
             <Animatable.Text animation="pulse" easing="ease-out" iterationCount="infinite" style={styles.bigBoi}>Aprender Matemáticas</Animatable.Text>
             <View>
-                <Touchable onPress={() => this.props.navigation.navigate('Test')} background={Touchable.Ripple('blue')}>
-                    <Text style={styles.button || styles.buttonText}>Iniciar juego</Text>
+                <Touchable onPress={() => this.props.navigation.navigate('Test')} background={Touchable.Ripple('yellow')}>
+                    <Text style={styles.button}>Iniciar juego</Text>
                 </Touchable>
                 
-                <Touchable onPress={() => this.props.navigation.navigate('Scoreboard')}>
-                    <Text style={styles.button || styles.buttonText}>Mejor puntaje</Text>
+                <Touchable onPress={() => this.props.navigation.navigate('Scoreboard')} background={Touchable.Ripple('yellow')}>
+                    <Text style={styles.button}>Mejor puntaje</Text>
                 </Touchable>
-                <Touchable onPress={() => this.props.navigation.navigate('Settings')}>
-                    <Text style={styles.button || styles.buttonText}>Configuración</Text>
+                <Touchable onPress={() => this.props.navigation.navigate('Settings')} background={Touchable.Ripple('yellow')}>
+                    <Text style={styles.button}>Configuración</Text>
                 </Touchable>
             </View>
         </View>

@@ -13,9 +13,11 @@ export default function getPracticeQuestion(difficulty) {
     //Esta en cierta forma desordenado
     //Usar solo los valores funciona bien para nuestro uso
     const operations = Object.values(Operators);
-    let operator = operations[Math.floor(Math.random() * operations.length)];
+    let operator = operations[Math.floor(operations.length * Math.random())];
     //Para el resultado, hay una forma de ejecutar un string en Javascript
-    let result = eval(a + operator + b);
+    let operationRes = `${a} ${operator} ${b}`;
+    console.log(operationRes);
+    let result = eval(operationRes);
 
     return { a, b, operator, result };
 }
