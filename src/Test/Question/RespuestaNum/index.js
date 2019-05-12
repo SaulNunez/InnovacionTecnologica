@@ -1,23 +1,34 @@
 import React from 'react';
 import { TextInput, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import Touchable from 'react-native-platform-touchable';
 
 const styles = StyleSheet.create({
     input: {
-        button: {
-            borderWidth: 2,
-            borderStyle: 'solid',
-            borderColor: '#000000',
-            marginVertical: 16,
-            minHeight: 48,
-            fontSize: 24,
-        },
+        borderWidth: 2,
+        borderStyle: 'solid',
+        borderColor: '#000000',
+        marginVertical: 16,
+        minHeight: 48,
+        fontSize: 24,
+
     },
-    inputWrong: input | {
+    inputWrong: this.input | {
         borderColor: 'red',
     },
-    inputRight: input | {
+    inputRight: this.input | {
         borderColor: 'green'
+    },
+    button: {
+        borderWidth: 2,
+        borderStyle:'solid',
+        backgroundColor: 'yellow',
+        borderColor: '#000000',
+        marginVertical: 16,
+        padding: 16,
+        minHeight: 48,
+        textAlign: 'center',
+        fontSize: 24,
     }
 });
 
@@ -54,7 +65,9 @@ export default class RespuestaNum extends React.Component {
                     style={this.state.answerSubmited ? (this.state.error ? styles.inputWrong : styles.inputRight) : styles.input}
                     onChangeText={(text) => this.setState({ entrada: text })}
                 />
-                <div onPress={() => { onAnswerSubmit(); }}>Siguiente</div>
+                <Touchable onPress={() => onAnswerSubmit()} background={Touchable.Ripple('yellow')}>
+                    <Text style={styles.button}>Siguiente</Text>
+                </Touchable>
             </>
         );
     }

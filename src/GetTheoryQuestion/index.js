@@ -10,9 +10,9 @@ export default function getTheoryQuestion(){
     //const correctAnswer = question.question[question.correctIndex];
     //question.answers.sort(()=> Math.random() - 0.5);
     //question.correctIndex = question.answers.findIndex((element) => element === correctAnswer);
-    //if(question.correctIndex === -1){
-    //    throw new Error('Algo paso y no pudimos encontrar la respuesta correcta');
-    //}
+    if(question.correctIndex === -1){
+        throw new Error('Algo paso y no pudimos encontrar la respuesta correcta');
+    }
 
     return question;
 }

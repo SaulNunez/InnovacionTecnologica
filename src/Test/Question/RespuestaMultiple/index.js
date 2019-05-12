@@ -9,13 +9,22 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         backgroundColor: '#89CFF0',
         borderColor: '#000000',
-        marginVertical: 16,
+        marginVertical: 4,
         padding: 16,
         minHeight: 48,
         textAlign: 'center',
-        fontSize: 24,
+        fontSize: 18,
     },
-    buttonSelected: button | {
+    buttonSelected: {
+        borderWidth: 2,
+        borderStyle: 'solid',
+        backgroundColor: '#89CFF0',
+        borderColor: '#000000',
+        marginVertical: 4,
+        padding: 16,
+        minHeight: 48,
+        textAlign: 'center',
+        fontSize: 18,
         backgroundColor: '#77B5FE',
         shadowColor: "#000",
         shadowOffset: {
@@ -29,21 +38,25 @@ const styles = StyleSheet.create({
 });
 
 export default class RespuestaMultiple extends React.Component {
-    opcionElegida(index) {
-        this.setState({optionSelected: index});
-        if (this.props.onOptionSelected) {
-            const isRight = index === this.props.question.correctIndex;
-            this.props.onOptionSelected(isRight);
-        }
+    constructor(props) {
+        super(props);
+        this.state = { indexSelected: -1 };
     }
 
     render() {
         return (
             <>
-                {this.props.question.answers.map(function (opcion, index, array) {
+                {this.props.question.answers.map((opcion, index, array) => {
                     return (
-                        <Touchable key={index} onPress={() => { opcionElegida(index) }} background={Touchable.Ripple('89CFF0')} disabled={!this.state.optionSelected}>
-                            <Text style={this.state.optionSelected && this.state.optionSelected === index? styles.buttonSelected:styles.button}>{opcion}</Text>
+                        <Touchable key={index} onPress={() => {
+                            this.setState({ indexSelected: index });
+                            if (this.props.onOptionSelected) {
+                                const isRight = index === this.props.question.correctIndex;
+                                this.props.onOptionSelected(isRight);
+                            }
+                        }} background={Touchable.Ripple('89CFF0')} 
+                        disabled={this.state.indexSelected !== -1}>
+                            <Text style={this.state.indexSelected === index ? styles.buttonSelected : styles.button}>{opcion}</Text>
                         </Touchable>
                     );
                 })}

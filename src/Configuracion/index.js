@@ -1,6 +1,12 @@
 import React from 'react';
-import { ScrollView, Text, Slider } from 'react-native';
+import { View, Text, Slider, StyleSheet } from 'react-native';
 
+const styles = StyleSheet.create({
+    betterView:{
+        maxWidth: 1024,
+        margin: 16
+    }
+});
 
 export default class Configuracion extends React.Component {
     static navigationOptions={
@@ -9,7 +15,7 @@ export default class Configuracion extends React.Component {
 
     render() {
         return(
-            <ScrollView>
+            <View style={styles.betterView}>
                 <Text>Música</Text>
                 <Slider
                     minimumValue={0}
@@ -22,7 +28,7 @@ export default class Configuracion extends React.Component {
                     maximumValue={100}
                     step={1}
                 />
-            </ScrollView>
+            </View>
         );
     }
 }

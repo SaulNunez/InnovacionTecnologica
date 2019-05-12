@@ -24,17 +24,12 @@ const styles = StyleSheet.create({
 });
 
 export default class Test extends React.Component {
-
-    //Para que aparezca el timer de la jugada
-    static navigationOptions = {
-        header: () => {
-            return (<Progress.Bar
-                progress={100 / MAX_AVAILABLE_TIME}
-                animated={true}
-                width={null} />);
-        },
-        headerBackTitle: null
-    };
+    getTestProgress() {
+        return (<Progress.Bar
+            progress={100 / MAX_AVAILABLE_TIME}
+            animated={true}
+            width={null} />);
+    }
 
     constructor(props) {
         super(props);
@@ -51,7 +46,7 @@ export default class Test extends React.Component {
             timeLeft: 100,
             questionType: question.questionType,
             end: false
-        }
+        };
     }
 
     componentDidMount() {
@@ -122,9 +117,9 @@ export default class Test extends React.Component {
     render() {
         return (
             <KeyboardAvoidingView>
-                <Text style={styles.questionNumber}>Pregunta {this.state.indicePregunta}</Text>
+                <Text style={styles.questionNumber}>Pregunta {this.state.questionNumber}</Text>
                 <Text style={styles.questionTitle}>{this.state.questionType == QUESTION_TYPE_THEORY ?
-                    this.state.question.pregunta :
+                    this.state.question.question :
                     this.state.question.a + this.state.question.operator + this.state.question.b}</Text>
                 {
                     this.state.questionType === QUESTION_TYPE_THEORY? <RespuestaMultiple question={this.state.question} onOptionSelected={(right) => { }} />
