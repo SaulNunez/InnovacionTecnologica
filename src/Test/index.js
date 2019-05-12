@@ -21,16 +21,12 @@ const styles = StyleSheet.create({
     questionTitle: {
         fontSize: 32
     },
+    paddedView: {
+        padding: 16
+    }
 });
 
 export default class Test extends React.Component {
-    getTestProgress() {
-        return (<Progress.Bar
-            progress={100 / MAX_AVAILABLE_TIME}
-            animated={true}
-            width={null} />);
-    }
-
     constructor(props) {
         super(props);
 
@@ -71,9 +67,10 @@ export default class Test extends React.Component {
         this.timeout = setInterval(() => {
             this.setState({ timeLeft: this.state.timeLeft - 1 });
             if (this.state.timeLeft <= 0) {
+                clearInterval(this.timeout);
                 this.setState({ mode: GAME_MODE_REVISION, end: true });
 
-                if(this.state.end){
+                if (this.state.end) {
                     setTimeout(() => {
                         Alert.alert('Nivel superado!',
                             `Pasaste el nivel con ${this.state.correctAnswerCount} de ${this.state.questionNumber}`,
@@ -88,12 +85,12 @@ export default class Test extends React.Component {
         }, 1000);
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         clearInterval(this.timeout);
     }
 
     _onQuestionAnswered(isRight) {
-        this.setState({ questionNumber: questionNumber + 1 });
+        this.setState({ questionNumber: this.state.questionNumber + 1 });
         this.setState({ mode: GAME_MODE_REVISION });
 
         if (isRight) {
@@ -111,19 +108,33 @@ export default class Test extends React.Component {
                 question: newQuestion.question,
                 questionType: newQuestion.questionType
             });
-        }, 2600);
+        }, 1000);
     }
 
     render() {
         return (
-            <KeyboardAvoidingView>
+            <KeyboardAvoidingView style={styles.paddedView}>
+                <Progress.Bar
+                    progress={this.state.timeLeft / MAX_AVAILABLE_TIME}
+                    animated={true}
+                    width={null} />
                 <Text style={styles.questionNumber}>Pregunta {this.state.questionNumber}</Text>
                 <Text style={styles.questionTitle}>{this.state.questionType == QUESTION_TYPE_THEORY ?
                     this.state.question.question :
-                    this.state.question.a + this.state.question.operator + this.state.question.b}</Text>
+                    this.state.question.a.toString() + this.state.question.operator + this.state.question.b.toString()}</Text>
                 {
-                    this.state.questionType === QUESTION_TYPE_THEORY? <RespuestaMultiple question={this.state.question} onOptionSelected={(right) => { this.onQuestionAnswered(right) }} />
-                    : <RespuestaNum correctAnswer={this.state.question.result} onAnswerGiven={(right) => { this.onQuestionAnswered(right) }} />
+                    //Tal vez te preguntes porque las keys
+                    //Es un patron de React donde hay comportamiento del que tiene propiedad el componente
+                    //Y para "resetear" el componente cuando cambien los props
+                    //Puedes usar la llave para decir que es un elemento distinto y crea un nuevo componente
+                    //En lugar de reusarlo
+                    //YO DEL FUTURO
+                    //No estoy seguro, pero talvez no funciono como esperaba
+                    //En lugar, segun recomendación oficial
+                    //Hay un metodo que ocurre antes de renderizar y vamos a usarlo
+                    //Para al detectar un cambio de props, resetear el estado del componente
+                    this.state.questionType === QUESTION_TYPE_THEORY ? <RespuestaMultiple question={this.state.question} onOptionSelected={(right) => { this._onQuestionAnswered(right) }} key={this.state.questionNumber} />
+                        : <RespuestaNum correctAnswer={this.state.question.result.toString()} onAnswerGiven={(right) => { this._onQuestionAnswered(right) }} key={this.state.questionNumber} />
                 }
             </KeyboardAvoidingView>
         );

@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 export default class RespuestaNum extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { entrada: '', error: false };
+        this.state = { entry: '', error: false, correctAnswer: props.correctAnswer };
     }
 
     componentDidMount() {
@@ -44,8 +44,8 @@ export default class RespuestaNum extends React.Component {
         }
     }
 
-    onAnswerSubmit() {
-        const isRight = entrada.trim() == this.props.correctAnswer;
+    _onAnswerSubmit() {
+        const isRight = this.state.entry.trim() == this.props.correctAnswer;
         this.setState({ answerSubmited: true });
         if (!isRight) {
             this.setState({ error: true });
@@ -63,15 +63,23 @@ export default class RespuestaNum extends React.Component {
                     enablesReturnKeyAutomatically={true}
                     returnKeyType='done'
                     ref={this.mathTextInput}
-                    onSubmitEditing={() => { onAnswerSubmit(); }}
+                    onSubmitEditing={() => { this._onAnswerSubmit(); }}
                     style={this.state.answerSubmited ? (this.state.error ? styles.inputWrong : styles.inputRight) : styles.input}
-                    onChangeText={(text) => this.setState({ entrada: text })}
+                    onChangeText={(text) => this.setState({ entry: text })}
                 />
-                <Touchable onPress={() => onAnswerSubmit()} background={Touchable.Ripple('yellow')}>
+                <Touchable onPress={() => this._onAnswerSubmit()} background={Touchable.Ripple('yellow')}>
                     <Text style={styles.button}>Siguiente</Text>
                 </Touchable>
             </>
         );
+    }
+
+    static getDerivedStateFromProps(props, state){
+        if(props.correctAnswer !== state.correctAnswer){
+            return { entry: '', error: false, correctAnswer: props.correctAnswer };
+        }
+
+        return null;
     }
 }
 
