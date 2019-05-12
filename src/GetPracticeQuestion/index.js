@@ -16,15 +16,8 @@ export default function getPracticeQuestion(difficulty) {
     //Para el resultado, hay una forma de ejecutar un string en Javascript
     let operationRes = `${a} ${operator} ${b}`;
     console.log(operationRes);
-    let result = 0;
-    switch(operationRes){
-        case Operators.SUM:
-            result = a + b;
-        case Operators.SUBSTRACTION:
-            result = a - b;
-        case Operators.MULTIPLICATION:
-            result = a * b;
-    }
+    let result =  eval(operationRes);
+    result = result.toString();
 
-    return { a, b, operator, result };
+    return { a, b, operator, result, operation: operationRes };
 }

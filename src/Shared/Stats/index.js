@@ -18,4 +18,17 @@ export async function getStatistics(){
 
 export async function purgeCurrentData(){
     await AsyncStorage.removeItem('points');
+    await AsyncStorage.removeItem('maxQuestionsAnswered');
+}
+
+export async function updateVolume({music, fx}){
+    await AsyncStorage.setItem('music', music);
+    await AsyncStorage.setItem('fx', fx);
+}
+
+export async function getVolume(){
+    let fx = await AsyncStorage.getItem('volume') || 0;
+    let music = await AsyncStorage.getItem('fx') || 0;
+
+    return {fx, music};
 }

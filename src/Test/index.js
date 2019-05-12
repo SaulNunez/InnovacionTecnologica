@@ -73,7 +73,8 @@ export default class Test extends React.Component {
                 if (this.state.end) {
                     setTimeout(() => {
                         Alert.alert('Nivel superado!',
-                            `Pasaste el nivel con ${this.state.correctAnswerCount} de ${this.state.questionNumber}`,
+                            this.state.correctAnswerCount / this.state.questionNumber > 0.6? `Pasaste el nivel con ${this.state.correctAnswerCount} de ${this.state.questionNumber}`:
+                            `Pansaste el nivel con ${this.state.correctAnswerCount} de ${this.state.questionNumber}`,
                             [{
                                 text: 'OK', onPress: () => {
                                     this.props.navigation.popToTop();
@@ -124,7 +125,7 @@ export default class Test extends React.Component {
                 <Text>Correctas - {this.state.correctAnswerCount}</Text>
                 <Text style={styles.questionTitle}>{this.state.questionType == QUESTION_TYPE_THEORY ?
                     this.state.question.question :
-                    `${this.state.question.a} ${this.state.operator.toString()} ${this.state.question.b}`}</Text>
+                    `${this.state.question.operation}`}</Text>
                 {
                     //Tal vez te preguntes porque las keys
                     //Es un patron de React donde hay comportamiento del que tiene propiedad el componente
