@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     },
     button: {
         borderWidth: 2,
-        borderStyle:'solid',
+        borderStyle: 'solid',
         backgroundColor: 'yellow',
         borderColor: '#000000',
         marginVertical: 16,
@@ -35,22 +35,18 @@ const styles = StyleSheet.create({
 export default class RespuestaNum extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { entry: '', error: false, correctAnswer: props.correctAnswer };
+        this.mathTextInput = React.createRef();
+        this.state = { entry: '' };
     }
 
     componentDidMount() {
-        if(this.mathTextInput){
+        if (this.mathTextInput) {
             this.mathTextInput.focus();
         }
     }
 
     _onAnswerSubmit() {
         const isRight = this.state.entry.trim() == this.props.correctAnswer;
-        this.setState({ answerSubmited: true });
-        if (!isRight) {
-            this.setState({ error: true });
-        }
-
         if (this.props.onAnswerGiven) {
             this.props.onAnswerGiven(isRight);
         }
@@ -63,27 +59,30 @@ export default class RespuestaNum extends React.Component {
                     enablesReturnKeyAutomatically={true}
                     returnKeyType='done'
                     ref={this.mathTextInput}
-                    onSubmitEditing={() => { this._onAnswerSubmit(); }}
-                    style={this.state.answerSubmited ? (this.state.error ? styles.inputWrong : styles.inputRight) : styles.input}
+                    onSubmitEditing={() => {
+                        if (this.props.answerSubmited !== null) {
+                            this._onAnswerSubmit();
+                        }
+                    }}
+                    style={this.state.answerSubmited !== null ? (this.props.correctAnswer !== this.state.entry ? styles.inputWrong : styles.inputRight) : styles.input}
                     onChangeText={(text) => this.setState({ entry: text })}
                 />
-                <Touchable onPress={() => this._onAnswerSubmit()} background={Touchable.Ripple('yellow')}>
+                <Touchable onPress={() => {
+                    if (this.props.answerSubmited !== null) {
+                        this._onAnswerSubmit();
+                    }
+                }} 
+                background={Touchable.Ripple('yellow')}>
                     <Text style={styles.button}>Siguiente</Text>
                 </Touchable>
             </>
         );
     }
-
-    static getDerivedStateFromProps(props, state){
-        if(props.correctAnswer !== state.correctAnswer){
-            return { entry: '', error: false, correctAnswer: props.correctAnswer };
-        }
-
-        return null;
-    }
 }
+
 
 RespuestaNum.propTypes = {
     correctAnswer: PropTypes.string.isRequired,
-    onAnswerGiven: PropTypes.func.isRequired
+    onAnswerGiven: PropTypes.func.isRequired,
+    answerSubmited: PropTypes.number,
 };

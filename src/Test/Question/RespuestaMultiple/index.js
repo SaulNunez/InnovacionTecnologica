@@ -61,5 +61,5 @@ const RespuestaMultiple = (props) => {
 RespuestaMultiple.propTypes = {
     question: PropTypes.object.isRequired,
     onOptionSelected: PropTypes.func.isRequired,
-    indexSelected: PropTypes.number.isRequired,
+    indexSelected: PropTypes.number,
 };
