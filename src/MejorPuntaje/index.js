@@ -5,10 +5,12 @@ import Touchable from 'react-native-platform-touchable';
 
 const styles = StyleSheet.create({
     title: {
-        fontSize: 48
+        fontSize: 48,
+        color: 'white'
     },
     display: {
-        fontSize: 32
+        fontSize: 32,
+        color:'white'
     },
     button: {
         borderWidth: 2,
@@ -29,21 +31,28 @@ export default class MejorPuntaje extends React.Component {
     };
 
     constructor(props) {
+        super(props);
+
         this.state = {
-            bestScore: getStatistics() || 0,
-            difficulty: getDifficulty() || 0
+            bestScore: 0,
+            difficulty: 0
         };
     }
 
+    async componentDidMount(){
+        this.setState({bestScore: await getDifficulty()});
+        this.setState({difficulty: await getStatistics()});
+    } 
+
     render() {
         return (
-            <ImageBackground source={require('../../assets/page.png')} style={{ width: '100%', height: '100%' }}>>
-            <ScrollView>
+            <ImageBackground source={require('../../assets/page.png')} style={{ width: '100%', height: '100%' }}>
+                <ScrollView>
                     <View>
                         <Text style={styles.title}>Mejor puntaje</Text>
-                        <text style={styles.display}>{this.state.bestScore}</text>
+                        <Text style={styles.display}>{this.state.bestScore.toString()}</Text>
                         <Text style={styles.title}>Dificultad actual</Text>
-                        <text style={styles.display}>{this.state.difficulty}</text>
+                        <Text style={styles.display}>{this.state.difficulty.toString()}</Text>
                     </View>
                     <Touchable onPress={() => purgeCurrentData()} background={Touchable.Ripple('yellow')}>
                         <Text style={styles.button}>Borrar datos</Text>
