@@ -14,6 +14,15 @@ export default class Configuracion extends React.Component {
         title: 'Configuración'
     };
 
+    constructor(props){
+        super(props);
+
+        this.state = {
+            music: 0,
+            fx: 0
+        }
+    }
+
     render() {
         return(
             <ImageBackground source={require('../../assets/page.png')} style={{width: '100%', height: '100%'}}>
@@ -23,6 +32,7 @@ export default class Configuracion extends React.Component {
                     minimumValue={0}
                     maximumValue={100}
                     value={this.state.music}
+                    onValueChange={(value) => this.setState({music: value})}
                     step={1}
                 />
                 <Text>Efectos de Sonido</Text>
@@ -30,6 +40,7 @@ export default class Configuracion extends React.Component {
                     minimumValue={0}
                     maximumValue={100}
                     value={this.state.fx}
+                    onValueChange={(value) => this.setState({fx: value})}
                     step={1}
                 />
             </View>
@@ -37,8 +48,8 @@ export default class Configuracion extends React.Component {
         );
     }
 
-    componentWillMount(){
-        let volInfo = getVolume();
+    async componentDidMount(){
+        let volInfo = await getVolume();
         this.setState({
             music: volInfo.music,
             fx: volInfo.fx

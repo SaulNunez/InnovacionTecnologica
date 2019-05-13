@@ -49,8 +49,8 @@ export async function purgeCurrentData() {
 
 export async function updateVolume({ music, fx }) {
     try {
-        await AsyncStorage.setItem('music', music);
-        await AsyncStorage.setItem('fx', fx);
+        await AsyncStorage.setItem('music', music.toString());
+        await AsyncStorage.setItem('fx', fx.toString());
     } catch (error) {
         console.error(error.message);
     }
@@ -60,8 +60,8 @@ export async function getVolume() {
     let fx = 0;
     let music = 0;
     try {
-        fx = await AsyncStorage.getItem('volume') || 0;
-        music = await AsyncStorage.getItem('fx') || 0;
+        music = parseInt(await AsyncStorage.getItem('volume') || 0);
+        fx = parseInt(await AsyncStorage.getItem('fx') || 0);
     } catch (error) {
         console.error(error.message);
     }

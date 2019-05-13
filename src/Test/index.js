@@ -147,10 +147,11 @@ export default class Test extends React.Component {
                                     this._onQuestionAnswered(isRight);
                                     this.setState({ selectedAnswer: index });
                                 }}
+                                isOnRevision={this.state.mode === GAME_MODE_REVISION}
                                 indexSelected={"selectedAnswer" in this.state.question ? this.state.selectedAnswer : null} /> :
                             <RespuestaNum
                                 onAnswerGiven={() => {
-                                    let isRight = parseInt(this.state.selectedAnswer) === this.state.question.result; 
+                                    let isRight = parseInt(this.state.selectedAnswer) === this.state.question.result;
                                     this._onQuestionAnswered(isRight);
                                 }}
                                 onRevisionMode={this.state.mode === GAME_MODE_REVISION}

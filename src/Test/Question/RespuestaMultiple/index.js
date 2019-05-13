@@ -18,22 +18,13 @@ const styles = StyleSheet.create({
     buttonSelected: {
         borderWidth: 2,
         borderStyle: 'solid',
-        backgroundColor: '#89CFF0',
+        backgroundColor: '#ffffff',
         borderColor: '#000000',
         marginVertical: 4,
         padding: 16,
         minHeight: 48,
         textAlign: 'center',
         fontSize: 18,
-        backgroundColor: '#77B5FE',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 12,
-        },
-        shadowOpacity: 0.58,
-        shadowRadius: 16.00,
-        elevation: 24,
     }
 });
 
