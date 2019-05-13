@@ -48,7 +48,7 @@ export default RespuestaMultiple = (props) => {
                         }}
                         background={Touchable.Ripple('#89CFF0')}
                         disabled={props.isOnRevision}>
-                        <Text style={props.indexSelected === index ? styles.buttonSelected : styles.button}>{opcion}</Text>
+                        <Text style={props.indexSelected !== null && props.indexSelected === index ? styles.buttonSelected : styles.button}>{opcion}</Text>
                     </Touchable>
                 );
             })}

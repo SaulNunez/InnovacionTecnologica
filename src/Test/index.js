@@ -142,8 +142,9 @@ export default class Test extends React.Component {
                     {
                         this.state.questionType === QUESTION_TYPE_THEORY ?
                             <RespuestaMultiple question={this.state.question}
-                                onOptionSelected={(right, index) => {
-                                    this._onQuestionAnswered(right);
+                                onAnswerSelected={(index) => {
+                                    let isRight = index === this.state.question.correctIndex;
+                                    this._onQuestionAnswered(isRight);
                                     this.setState({ selectedAnswer: index });
                                 }}
                                 indexSelected={"selectedAnswer" in this.state.question ? this.state.selectedAnswer : null} /> :
