@@ -1,5 +1,5 @@
 import React, { PropTypes, } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, ImageBackground } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import * as Animatable from 'react-native-animatable';
 
@@ -40,6 +40,7 @@ export default class Start extends React.Component {
 
     render() {
         return(
+            <ImageBackground source={require('../../assets/page.png')} style={{width: '100%', height: '100%'}}>
         <View style={styles.centeredView}>
             <Animatable.Text animation="pulse" easing="ease-out" iterationCount="infinite" style={styles.bigBoi}>Aprender Matemáticas</Animatable.Text>
             <View>
@@ -55,6 +56,7 @@ export default class Start extends React.Component {
                 </Touchable>
             </View>
         </View>
+        </ImageBackground>
         );
     }
 }

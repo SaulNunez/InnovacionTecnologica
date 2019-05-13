@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Slider, StyleSheet } from 'react-native';
+import { View, Text, Slider, StyleSheet, ImageBackground } from 'react-native';
 import { getVolume, updateVolume } from '../Shared/Stats';
 
 const styles = StyleSheet.create({
@@ -16,6 +16,7 @@ export default class Configuracion extends React.Component {
 
     render() {
         return(
+            <ImageBackground source={require('../../assets/page.png')} style={{width: '100%', height: '100%'}}>
             <View style={styles.betterView}>
                 <Text>Música</Text>
                 <Slider
@@ -32,6 +33,7 @@ export default class Configuracion extends React.Component {
                     step={1}
                 />
             </View>
+            </ImageBackground>
         );
     }
 

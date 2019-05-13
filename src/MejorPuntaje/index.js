@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet } from 'react-native';
-import getDifficulty, {getStatistics, purgeCurrentData} from '../Shared/Stats';
+import { View, ScrollView, Text, StyleSheet, ImageBackground } from 'react-native';
+import getDifficulty, { getStatistics, purgeCurrentData } from '../Shared/Stats';
 import Touchable from 'react-native-platform-touchable';
 
 const styles = StyleSheet.create({
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     },
     button: {
         borderWidth: 2,
-        borderStyle:'solid',
+        borderStyle: 'solid',
         backgroundColor: 'yellow',
         borderColor: '#000000',
         marginVertical: 16,
@@ -25,31 +25,31 @@ const styles = StyleSheet.create({
 
 export default class MejorPuntaje extends React.Component {
     static navigationOptions = {
-        title:'Puntaje'
+        title: 'Puntaje'
     };
 
-    constructor(props){
+    constructor(props) {
         this.state = {
-            bestScore: getStatistics(),
-            difficulty: getDifficulty()
+            bestScore: getStatistics() || 0,
+            difficulty: getDifficulty() || 0
         };
     }
-    
-    render(){
-        return(
-        <View>
+
+    render() {
+        return (
+            <ImageBackground source={require('../../assets/page.png')} style={{ width: '100%', height: '100%' }}>>
             <ScrollView>
-                <View>
-                    <Text style={styles.title}>Mejor puntaje</Text>
-                    <text style={styles.display}>{this.state.bestScore}</text>
-                    <Text style={styles.title}>Dificultad actual</Text>
-                    <text style={styles.display}>{this.state.difficulty}</text>
-                </View>
-                <Touchable onPress={() => purgeCurrentData()} background={Touchable.Ripple('yellow')}>
-                    <Text style={styles.button}>Borrar datos</Text>
-                </Touchable>
-            </ScrollView>
-        </View>
+                    <View>
+                        <Text style={styles.title}>Mejor puntaje</Text>
+                        <text style={styles.display}>{this.state.bestScore}</text>
+                        <Text style={styles.title}>Dificultad actual</Text>
+                        <text style={styles.display}>{this.state.difficulty}</text>
+                    </View>
+                    <Touchable onPress={() => purgeCurrentData()} background={Touchable.Ripple('yellow')}>
+                        <Text style={styles.button}>Borrar datos</Text>
+                    </Touchable>
+                </ScrollView>
+            </ImageBackground>
         );
     }
 }

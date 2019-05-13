@@ -11,12 +11,21 @@ const styles = StyleSheet.create({
         marginVertical: 16,
         minHeight: 48,
         fontSize: 24,
-
     },
-    inputWrong: this.input | {
+    inputWrong: {
+        borderWidth: 2,
+        borderStyle: 'solid',
         borderColor: 'red',
+        marginVertical: 16,
+        minHeight: 48,
+        fontSize: 24,
     },
-    inputRight: this.input | {
+    inputRight: {
+        borderWidth: 2,
+        borderStyle: 'solid',
+        marginVertical: 16,
+        minHeight: 48,
+        fontSize: 24,
         borderColor: 'green'
     },
     button: {
@@ -71,6 +80,14 @@ export default class RespuestaNum extends React.Component {
                 </Touchable>
             </>
         );
+    }
+
+    static getDerivedStateFromProps(props, state){
+        if(props.answerSubmited === null && (state.entry !== '' && parseInt(state.entry) === props.correctAnswer)){
+            return {entry: ''};
+        }
+
+        return null;
     }
 }
 

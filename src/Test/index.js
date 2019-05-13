@@ -1,5 +1,5 @@
 import React from 'react';
-import { KeyboardAvoidingView, Alert, StyleSheet, Text } from 'react-native';
+import { KeyboardAvoidingView, Alert, StyleSheet, Text, ImageBackground } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { Audio } from 'expo';
 import RespuestaMultiple from './Question/RespuestaMultiple';
@@ -30,7 +30,7 @@ export default class Test extends React.Component {
     constructor(props) {
         super(props);
 
-        const question = getNewQuestion(getDifficulty() || 0);
+        const question = getNewQuestion(getDifficulty());
         console.log(question);
 
         this.state = {
@@ -49,14 +49,14 @@ export default class Test extends React.Component {
         const initSounds = async () => {
             this.correctAnswerSound = new Audio.Sound();
             try {
-                await this.correctAnswerSound.loadAsync(require('../../assets/sounds/411088__inspectorj__bell-candle-damper-a-h4n.wav'));
+                await this.correctAnswerSound.loadAsync(require('../../assets/sounds/right_ding.wav'));
             } catch (error) {
                 console.log(error);
             }
 
             this.badAnswerSound = new Audio.Sound();
             try {
-                await this.badAnswerSound.loadAsync(require('../../assets/sounds/331912__kevinvg207__wrong-buzzer.wav'));
+                await this.badAnswerSound.loadAsync(require('../../assets/sounds/wrong_buzzer.wav'));
             } catch (error) {
                 console.log(error);
             }
@@ -100,10 +100,18 @@ export default class Test extends React.Component {
             this.setState({ correctAnswerCount: this.state.correctAnswerCount + 1,
                 difficultyLevel: Math.floor(this.state.questionNumber / 10),
                 timeLeft: this.state.timeLeft + 3 });
-            this.correctAnswerSound.playAsync();
+                try{
+                    this.correctAnswerSound.playAsync();
+                } catch(error){
+                    console.error(error.message);
+                }
         } else {
             this.setState({timeLeft: this.state.timeLeft - 3});
-            this.badAnswerSound.playAsync();
+            try{
+                this.badAnswerSound.playAsync();
+            } catch(error){
+                console.error(error.message);
+            }
         }
 
         setTimeout(() => {
@@ -119,7 +127,8 @@ export default class Test extends React.Component {
 
     render() {
         return (
-            <KeyboardAvoidingView style={styles.paddedView}>
+            <ImageBackground source={require('../../assets/page.png')} style={{width: '100%', height: '100%'}}>
+                <KeyboardAvoidingView style={styles.paddedView}>
                 <Progress.Bar
                     progress={this.state.timeLeft / MAX_AVAILABLE_TIME}
                     animated={true}
@@ -143,9 +152,11 @@ export default class Test extends React.Component {
                         this._onQuestionAnswered(right);
                         this.setState({selectedAnswer: index});
                      }}
-                    answerSubmited={"selectedAnswer" in this.state.question? parseInt(this.state.selectedAnswer) : null} />
+                    answerSubmited={"selectedAnswer" in this.state.question? parseInt(this.state.selectedAnswer) : null}
+                    key={this.state.correctAnswerCount} />
                 }
             </KeyboardAvoidingView>
+            </ImageBackground>
         );
     }
 }
