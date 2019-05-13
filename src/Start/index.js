@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
         fontSize: 48,
         textAlign: 'center',
         marginTop: 64,
-        marginBottom: 64
+        marginBottom: 64,
+        
     },
     centeredView: {
         justifyContent: 'center',

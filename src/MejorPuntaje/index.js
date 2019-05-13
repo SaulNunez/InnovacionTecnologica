@@ -22,7 +22,12 @@ const styles = StyleSheet.create({
         minHeight: 48,
         textAlign: 'center',
         fontSize: 24,
-    }
+    },
+    centeredView: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width:'100%'
+    },
 });
 
 export default class MejorPuntaje extends React.Component {
@@ -47,7 +52,7 @@ export default class MejorPuntaje extends React.Component {
     render() {
         return (
             <ImageBackground source={require('../../assets/page.png')} style={{ width: '100%', height: '100%' }}>
-                <ScrollView>
+                <ScrollView style={styles.centeredView}>
                     <View>
                         <Text style={styles.title}>Mejor puntaje</Text>
                         <Text style={styles.display}>{this.state.bestScore.toString()}</Text>
