@@ -39,16 +39,10 @@ export default class RespuestaNum extends React.Component {
         this.state = { entry: '' };
     }
 
-    componentDidMount() {
-        if (this.mathTextInput) {
-            this.mathTextInput.focus();
-        }
-    }
-
     _onAnswerSubmit() {
-        const isRight = this.state.entry.trim() == this.props.correctAnswer;
+        const isRight = parseInt(this.state.entry) == this.props.correctAnswer;
         if (this.props.onAnswerGiven) {
-            this.props.onAnswerGiven(isRight);
+            this.props.onAnswerGiven(isRight, this.state.entry);
         }
     }
 
@@ -60,19 +54,19 @@ export default class RespuestaNum extends React.Component {
                     returnKeyType='done'
                     ref={this.mathTextInput}
                     onSubmitEditing={() => {
-                        if (this.props.answerSubmited !== null) {
+                        if (this.props.answerSubmited === null) {
                             this._onAnswerSubmit();
                         }
                     }}
-                    style={this.state.answerSubmited !== null ? (this.props.correctAnswer !== this.state.entry ? styles.inputWrong : styles.inputRight) : styles.input}
+                    style={this.props.answerSubmited !== null ? (this.props.correctAnswer !== parseInt(this.state.entry) ? styles.inputWrong : styles.inputRight) : styles.input}
                     onChangeText={(text) => this.setState({ entry: text })}
                 />
                 <Touchable onPress={() => {
-                    if (this.props.answerSubmited !== null) {
+                    if (this.props.answerSubmited === null) {
                         this._onAnswerSubmit();
                     }
-                }} 
-                background={Touchable.Ripple('yellow')}>
+                }}
+                    background={Touchable.Ripple('yellow')}>
                     <Text style={styles.button}>Siguiente</Text>
                 </Touchable>
             </>
@@ -82,7 +76,7 @@ export default class RespuestaNum extends React.Component {
 
 
 RespuestaNum.propTypes = {
-    correctAnswer: PropTypes.string.isRequired,
+    correctAnswer: PropTypes.number.isRequired,
     onAnswerGiven: PropTypes.func.isRequired,
     answerSubmited: PropTypes.number,
 };

@@ -30,7 +30,7 @@ export default class Test extends React.Component {
     constructor(props) {
         super(props);
 
-        const question = getNewQuestion(getDifficulty());
+        const question = getNewQuestion(getDifficulty() || 0);
         console.log(question);
 
         this.state = {
@@ -97,10 +97,12 @@ export default class Test extends React.Component {
         this.setState({ mode: GAME_MODE_REVISION });
 
         if (isRight) {
-            this.setState({ correctAnswerCount: this.state.correctAnswerCount + 1 });
+            this.setState({ correctAnswerCount: this.state.correctAnswerCount + 1,
+                difficultyLevel: Math.floor(this.state.questionNumber / 10),
+                timeLeft: this.state.timeLeft + 3 });
             this.correctAnswerSound.playAsync();
-            this.setState({ difficultyLevel: Math.floor(this.state.questionNumber / 10) });
         } else {
+            this.setState({timeLeft: this.state.timeLeft - 3});
             this.badAnswerSound.playAsync();
         }
 
@@ -109,7 +111,8 @@ export default class Test extends React.Component {
             this.setState({
                 mode: GAME_MODE_QUESTION,
                 question: newQuestion.question,
-                questionType: newQuestion.questionType
+                questionType: newQuestion.questionType,
+                selectedAnswer: null
             });
         }, 1000);
     }
@@ -127,18 +130,20 @@ export default class Test extends React.Component {
                     this.state.question.question :
                     `${this.state.question.operation}`}</Text>
                 {
-                    //Tal vez te preguntes porque las keys
-                    //Es un patron de React donde hay comportamiento del que tiene propiedad el componente
-                    //Y para "resetear" el componente cuando cambien los props
-                    //Puedes usar la llave para decir que es un elemento distinto y crea un nuevo componente
-                    //En lugar de reusarlo
-                    //YO DEL FUTURO
-                    //No estoy seguro, pero talvez no funciono como esperaba
-                    //En lugar, segun recomendación oficial
-                    //Hay un metodo que ocurre antes de renderizar y vamos a usarlo
-                    //Para al detectar un cambio de props, resetear el estado del componente
-                    this.state.questionType === QUESTION_TYPE_THEORY ? <RespuestaMultiple question={this.state.question} onOptionSelected={(right) => { this._onQuestionAnswered(right) }} key={this.state.questionNumber} />
-                        : <RespuestaNum correctAnswer={this.state.question.result.toString()} onAnswerGiven={(right) => { this._onQuestionAnswered(right) }} key={this.state.questionNumber} />
+                    this.state.questionType === QUESTION_TYPE_THEORY ? 
+                    <RespuestaMultiple question={this.state.question}
+                     onOptionSelected={(right, index) => { 
+                        this._onQuestionAnswered(right);
+                        this.setState({selectedAnswer: index});
+                    }}
+                    indexSelected={"selectedAnswer" in this.state.question? this.state.selectedAnswer : null} /> : 
+                    <RespuestaNum 
+                    correctAnswer={parseInt(this.state.question.result)} 
+                    onAnswerGiven={(right, index) => { 
+                        this._onQuestionAnswered(right);
+                        this.setState({selectedAnswer: index});
+                     }}
+                    answerSubmited={"selectedAnswer" in this.state.question? parseInt(this.state.selectedAnswer) : null} />
                 }
             </KeyboardAvoidingView>
         );

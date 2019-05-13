@@ -37,23 +37,20 @@ const styles = StyleSheet.create({
     }
 });
 
-const RespuestaMultiple = (props) => {
-    return(
+export default RespuestaMultiple = (props) => {
+    return (
         <>
-        { props.question.answers.map((opcion, index, array) => {
-            return (
-                <Touchable key={index} onPress={() => {
-                    if (this.props.onOptionSelected) {
-                        const isRight = index === this.props.question.correctIndex;
-                        this.props.onOptionSelected(isRight);
-                    }
-                }} 
-                background={Touchable.Ripple('89CFF0')}                
-                disabled={props.indexSelected !== -1 || props.indexSelected !== null}>
-                    <Text style={props.indexSelected === index ? styles.buttonSelected : styles.button}>{opcion}</Text>
-                </Touchable>
-            );
-        })}
+            {props.question.answers.map((opcion, index, array) => {
+                return (
+                    <Touchable key={index} onPress={() => {
+                        const isRight = index === props.question.correctIndex;
+                        props.onOptionSelected(isRight, index);
+                    }}
+                        background={Touchable.Ripple('89CFF0')}>
+                        <Text style={props.indexSelected === index ? styles.buttonSelected : styles.button}>{opcion}</Text>
+                    </Touchable>
+                );
+            })}
         </>
     );
 }
