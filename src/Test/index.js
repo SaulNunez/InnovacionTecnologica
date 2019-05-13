@@ -6,6 +6,7 @@ import RespuestaMultiple from './Question/RespuestaMultiple';
 import RespuestaNum from './Question/RespuestaNum';
 import getNewQuestion, { QUESTION_TYPE_PRACTICE, QUESTION_TYPE_THEORY } from '../GetQuestion';
 import getDifficulty, { setDifficulty, updateStatistics } from '../Shared/Stats';
+import getTheoryQuestion from '../GetTheoryQuestion';
 
 
 const MAX_AVAILABLE_TIME = 100;
@@ -31,7 +32,10 @@ export default class Test extends React.Component {
     constructor(props) {
         super(props);
 
-        const question = getNewQuestion(getDifficulty());
+        const question =  {
+            question: getTheoryQuestion(),
+            questionType: QUESTION_TYPE_THEORY
+        };
         console.log(question);
 
         this.state = {
@@ -52,6 +56,7 @@ export default class Test extends React.Component {
             this.correctAnswerSound = new Audio.Sound();
             try {
                 await this.correctAnswerSound.loadAsync(require('../../assets/sounds/right_ding.wav'));
+                this.correctAnswerSound.setVolumeAsync = getVolume().fx;
             } catch (error) {
                 console.log(error);
             }
@@ -59,6 +64,7 @@ export default class Test extends React.Component {
             this.badAnswerSound = new Audio.Sound();
             try {
                 await this.badAnswerSound.loadAsync(require('../../assets/sounds/wrong_buzzer.wav'));
+                this.badAnswerSound.setVolumeAsync = getVolume().fx;
             } catch (error) {
                 console.log(error);
             }
@@ -105,14 +111,14 @@ export default class Test extends React.Component {
                 timeLeft: this.state.timeLeft + 3
             });
             try {
-                this.correctAnswerSound.playAsync();
+                this.correctAnswerSound.replayAsync();
             } catch (error) {
                 console.error(error.message);
             }
         } else {
             this.setState({ timeLeft: this.state.timeLeft - 3 });
             try {
-                this.badAnswerSound.playAsync();
+                this.badAnswerSound.replayAsync();
             } catch (error) {
                 console.error(error.message);
             }

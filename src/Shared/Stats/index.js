@@ -60,8 +60,8 @@ export async function getVolume() {
     let fx = 0;
     let music = 0;
     try {
-        music = parseInt(await AsyncStorage.getItem('volume') || 0);
-        fx = parseInt(await AsyncStorage.getItem('fx') || 0);
+        music = parseInt(await AsyncStorage.getItem('volume') || 100);
+        fx = parseInt(await AsyncStorage.getItem('fx') || 100);
     } catch (error) {
         console.error(error.message);
     }
