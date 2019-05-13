@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 64,
         marginBottom: 64,
-        
+        color: 'white'
     },
     centeredView: {
         justifyContent: 'center',
