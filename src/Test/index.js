@@ -5,7 +5,7 @@ import { Audio } from 'expo';
 import RespuestaMultiple from './Question/RespuestaMultiple';
 import RespuestaNum from './Question/RespuestaNum';
 import getNewQuestion, { QUESTION_TYPE_PRACTICE, QUESTION_TYPE_THEORY } from '../GetQuestion';
-import getDifficulty, {setDifficulty, updateStatistics} from '../Shared/Stats';
+import getDifficulty, { setDifficulty, updateStatistics } from '../Shared/Stats';
 
 
 const MAX_AVAILABLE_TIME = 100;
@@ -41,7 +41,8 @@ export default class Test extends React.Component {
             questionNumber: 1,
             timeLeft: 100,
             questionType: question.questionType,
-            end: false
+            end: false,
+            selectedAnswer: null
         };
     }
 
@@ -73,8 +74,8 @@ export default class Test extends React.Component {
                 if (this.state.end) {
                     setTimeout(() => {
                         Alert.alert('Nivel superado!',
-                            this.state.correctAnswerCount / this.state.questionNumber > 0.6? `Pasaste el nivel con ${this.state.correctAnswerCount} de ${this.state.questionNumber}`:
-                            `Pansaste el nivel con ${this.state.correctAnswerCount} de ${this.state.questionNumber}`,
+                            this.state.correctAnswerCount / this.state.questionNumber > 0.6 ? `Pasaste el nivel con ${this.state.correctAnswerCount} de ${this.state.questionNumber}` :
+                                `Pansaste el nivel con ${this.state.correctAnswerCount} de ${this.state.questionNumber}`,
                             [{
                                 text: 'OK', onPress: () => {
                                     this.props.navigation.popToTop();
@@ -97,19 +98,21 @@ export default class Test extends React.Component {
         this.setState({ mode: GAME_MODE_REVISION });
 
         if (isRight) {
-            this.setState({ correctAnswerCount: this.state.correctAnswerCount + 1,
+            this.setState({
+                correctAnswerCount: this.state.correctAnswerCount + 1,
                 difficultyLevel: Math.floor(this.state.questionNumber / 10),
-                timeLeft: this.state.timeLeft + 3 });
-                try{
-                    this.correctAnswerSound.playAsync();
-                } catch(error){
-                    console.error(error.message);
-                }
+                timeLeft: this.state.timeLeft + 3
+            });
+            try {
+                this.correctAnswerSound.playAsync();
+            } catch (error) {
+                console.error(error.message);
+            }
         } else {
-            this.setState({timeLeft: this.state.timeLeft - 3});
-            try{
+            this.setState({ timeLeft: this.state.timeLeft - 3 });
+            try {
                 this.badAnswerSound.playAsync();
-            } catch(error){
+            } catch (error) {
                 console.error(error.message);
             }
         }
@@ -127,35 +130,35 @@ export default class Test extends React.Component {
 
     render() {
         return (
-            <ImageBackground source={require('../../assets/page.png')} style={{width: '100%', height: '100%'}}>
+            <ImageBackground source={require('../../assets/page.png')} style={{ width: '100%', height: '100%' }}>
                 <KeyboardAvoidingView style={styles.paddedView}>
-                <Progress.Bar
-                    progress={this.state.timeLeft / MAX_AVAILABLE_TIME}
-                    animated={true}
-                    width={null} />
-                <Text style={styles.questionNumber}>Pregunta {this.state.questionNumber}</Text>
-                <Text>Correctas - {this.state.correctAnswerCount}</Text>
-                <Text style={styles.questionTitle}>{this.state.questionType == QUESTION_TYPE_THEORY ?
-                    this.state.question.question :
-                    `${this.state.question.operation}`}</Text>
-                {
-                    this.state.questionType === QUESTION_TYPE_THEORY ? 
-                    <RespuestaMultiple question={this.state.question}
-                     onOptionSelected={(right, index) => { 
-                        this._onQuestionAnswered(right);
-                        this.setState({selectedAnswer: index});
-                    }}
-                    indexSelected={"selectedAnswer" in this.state.question? this.state.selectedAnswer : null} /> : 
-                    <RespuestaNum 
-                    correctAnswer={parseInt(this.state.question.result)} 
-                    onAnswerGiven={(right, index) => { 
-                        this._onQuestionAnswered(right);
-                        this.setState({selectedAnswer: index});
-                     }}
-                    answerSubmited={"selectedAnswer" in this.state.question? parseInt(this.state.selectedAnswer) : null}
-                    key={this.state.correctAnswerCount} />
-                }
-            </KeyboardAvoidingView>
+                    <Progress.Bar
+                        progress={this.state.timeLeft / MAX_AVAILABLE_TIME}
+                        animated={true}
+                        width={null} />
+                    <Text style={styles.questionNumber}>Pregunta {this.state.questionNumber}</Text>
+                    <Text>Correctas - {this.state.correctAnswerCount}</Text>
+                    <Text style={styles.questionTitle}>{this.state.questionType == QUESTION_TYPE_THEORY ?
+                        this.state.question.question :
+                        `${this.state.question.operation}`}</Text>
+                    {
+                        this.state.questionType === QUESTION_TYPE_THEORY ?
+                            <RespuestaMultiple question={this.state.question}
+                                onOptionSelected={(right, index) => {
+                                    this._onQuestionAnswered(right);
+                                    this.setState({ selectedAnswer: index });
+                                }}
+                                indexSelected={"selectedAnswer" in this.state.question ? this.state.selectedAnswer : null} /> :
+                            <RespuestaNum
+                                onAnswerGiven={() => {
+                                    let isRight = parseInt(this.state.selectedAnswer) === this.state.question.result; 
+                                    this._onQuestionAnswered(isRight);
+                                }}
+                                onRevisionMode={this.state.mode === GAME_MODE_REVISION}
+                                textInputValue={this.state.selectedAnswer === null ? '' : this.state.selectedAnswer}
+                                onTextInputChange={(text) => this.setState({ selectedAnswer: text })} />
+                    }
+                </KeyboardAvoidingView>
             </ImageBackground>
         );
     }

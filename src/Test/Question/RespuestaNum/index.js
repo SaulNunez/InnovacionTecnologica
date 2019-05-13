@@ -41,59 +41,33 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class RespuestaNum extends React.Component {
-    constructor(props) {
-        super(props);
-        this.mathTextInput = React.createRef();
-        this.state = { entry: '' };
-    }
-
-    _onAnswerSubmit() {
-        const isRight = parseInt(this.state.entry) == this.props.correctAnswer;
-        if (this.props.onAnswerGiven) {
-            this.props.onAnswerGiven(isRight, this.state.entry);
-        }
-    }
-
-    render() {
-        return (
-            <>
-                <TextInput keyboardType='numeric'
-                    enablesReturnKeyAutomatically={true}
-                    returnKeyType='done'
-                    ref={this.mathTextInput}
-                    onSubmitEditing={() => {
-                        if (this.props.answerSubmited === null) {
-                            this._onAnswerSubmit();
-                        }
-                    }}
-                    style={this.props.answerSubmited !== null ? (this.props.correctAnswer !== parseInt(this.state.entry) ? styles.inputWrong : styles.inputRight) : styles.input}
-                    onChangeText={(text) => this.setState({ entry: text })}
-                />
-                <Touchable onPress={() => {
-                    if (this.props.answerSubmited === null) {
-                        this._onAnswerSubmit();
-                    }
+export default RespuestaNum = (props) => {
+    return (
+        <>
+            <TextInput keyboardType='numeric'
+                enablesReturnKeyAutomatically={true}
+                returnKeyType='done'
+                onSubmitEditing={() => {
+                    props.onAnswerGiven();
                 }}
-                    background={Touchable.Ripple('yellow')}>
-                    <Text style={styles.button}>Siguiente</Text>
-                </Touchable>
-            </>
-        );
-    }
-
-    static getDerivedStateFromProps(props, state){
-        if(props.answerSubmited === null && (state.entry !== '' && parseInt(state.entry) === props.correctAnswer)){
-            return {entry: ''};
-        }
-
-        return null;
-    }
-}
-
+                value={props.textInputValue}
+                style={props.onRevisionMode ?
+                    (props.correctAnswer !== parseInt(props.textInputValue) ? styles.inputWrong : styles.inputRight) : styles.input}
+                onChangeText={(text) => props.onTextInputChange(text)}
+            />
+            <Touchable onPress={() => {
+                props.onAnswerGiven();
+            }}
+                background={Touchable.Ripple('yellow')}>
+                <Text style={styles.button}>Siguiente</Text>
+            </Touchable>
+        </>
+    );
+};
 
 RespuestaNum.propTypes = {
-    correctAnswer: PropTypes.number.isRequired,
     onAnswerGiven: PropTypes.func.isRequired,
-    answerSubmited: PropTypes.number,
+    onRevisionMode: PropTypes.bool.isRequired,
+    textInputValue: PropTypes.string.isRequired,
+    onTextInputChange: PropTypes.func.isRequired,
 };
