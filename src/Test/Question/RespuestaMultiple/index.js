@@ -42,11 +42,12 @@ export default RespuestaMultiple = (props) => {
         <>
             {props.question.answers.map((opcion, index, array) => {
                 return (
-                    <Touchable key={index} onPress={() => {
-                        const isRight = index === props.question.correctIndex;
-                        props.onOptionSelected(isRight, index);
-                    }}
-                        background={Touchable.Ripple('89CFF0')}>
+                    <Touchable key={index}
+                        onPress={() => {
+                            props.onAnswerSelected(index);
+                        }}
+                        background={Touchable.Ripple('#89CFF0')}
+                        disabled={props.isOnRevision}>
                         <Text style={props.indexSelected === index ? styles.buttonSelected : styles.button}>{opcion}</Text>
                     </Touchable>
                 );
@@ -57,6 +58,7 @@ export default RespuestaMultiple = (props) => {
 
 RespuestaMultiple.propTypes = {
     question: PropTypes.object.isRequired,
-    onOptionSelected: PropTypes.func.isRequired,
     indexSelected: PropTypes.number,
+    onAnswerSelected: PropTypes.func.isRequired,
+    isOnRevision: PropTypes.bool.isRequired
 };

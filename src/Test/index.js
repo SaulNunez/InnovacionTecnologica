@@ -12,8 +12,6 @@ const MAX_AVAILABLE_TIME = 100;
 const GAME_MODE_QUESTION = 'QUESTION';
 const GAME_MODE_REVISION = 'REVISION';
 
-
-
 const styles = StyleSheet.create({
     questionNumber: {
         fontSize: 16
