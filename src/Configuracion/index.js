@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     betterView:{
         maxWidth: 1024,
         margin: 16
+    },
+    text: {
+        color: 'white'
     }
 });
 
@@ -27,7 +30,7 @@ export default class Configuracion extends React.Component {
         return(
             <ImageBackground source={require('../../assets/page.png')} style={{width: '100%', height: '100%'}}>
             <View style={styles.betterView}>
-                <Text>Música</Text>
+                <Text style={styles.text}>Música</Text>
                 <Slider
                     minimumValue={0}
                     maximumValue={100}
@@ -35,7 +38,7 @@ export default class Configuracion extends React.Component {
                     onValueChange={(value) => this.setState({music: value})}
                     step={1}
                 />
-                <Text>Efectos de Sonido</Text>
+                <Text style={styles.text}>Efectos de Sonido</Text>
                 <Slider
                     minimumValue={0}
                     maximumValue={100}
