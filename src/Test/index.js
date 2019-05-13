@@ -14,13 +14,16 @@ const GAME_MODE_REVISION = 'REVISION';
 
 const styles = StyleSheet.create({
     questionNumber: {
-        fontSize: 16
+        fontSize: 16,
+        color: 'white'
     },
     questionTitle: {
-        fontSize: 32
+        fontSize: 32,
+        color: 'white'
     },
     paddedView: {
-        padding: 16
+        padding: 16,
+        color: 'white'
     }
 });
 
