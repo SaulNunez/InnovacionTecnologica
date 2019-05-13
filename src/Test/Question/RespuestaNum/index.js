@@ -52,7 +52,7 @@ export default RespuestaNum = (props) => {
                 }}
                 value={props.textInputValue}
                 style={props.onRevisionMode ?
-                    (props.correctAnswer !== parseInt(props.textInputValue) ? styles.inputWrong : styles.inputRight) : styles.input}
+                    (parseInt(props.correctAnswer) !== parseInt(props.textInputValue) ? styles.inputWrong : styles.inputRight) : styles.input}
                 onChangeText={(text) => props.onTextInputChange(text)}
             />
             <Touchable onPress={() => {

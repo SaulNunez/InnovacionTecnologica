@@ -144,6 +144,7 @@ export default class Test extends React.Component {
                             <RespuestaMultiple question={this.state.question}
                                 onAnswerSelected={(index) => {
                                     let isRight = index === this.state.question.correctIndex;
+                                    console.log(`Opcion elegida: ${index}, opcion correcta: ${this.state.question.correctIndex}`);
                                     this._onQuestionAnswered(isRight);
                                     this.setState({ selectedAnswer: index });
                                 }}
@@ -151,7 +152,8 @@ export default class Test extends React.Component {
                                 indexSelected={"selectedAnswer" in this.state.question ? this.state.selectedAnswer : null} /> :
                             <RespuestaNum
                                 onAnswerGiven={() => {
-                                    let isRight = parseInt(this.state.selectedAnswer) === this.state.question.result;
+                                    let isRight = parseInt(this.state.selectedAnswer) === parseInt(this.state.question.result);
+                                    console.log(`Opcion elegida: ${this.state.selectedAnswer}, opcion correcta: ${this.state.question.result}`);
                                     this._onQuestionAnswered(isRight);
                                 }}
                                 onRevisionMode={this.state.mode === GAME_MODE_REVISION}

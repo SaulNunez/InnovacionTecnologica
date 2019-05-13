@@ -7,7 +7,7 @@
             "Conjunto de todos los valores independientes por los cuales la función está indefinida",
             "Someter a una persona a tu voluntad"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Cual es el rango de una función?",
@@ -17,7 +17,7 @@
             "Conjunto de todos los valores independientes por los cuales la función está indefinida",
             "Conjunto de todos los valores imaginarios que puede llegar a tomar la función"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Cómo se llaman los triángulos con dos lados iguales y uno desigual?",
@@ -29,7 +29,7 @@
             "Obtusángulo",
             "Rectángulo"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Cómo se llaman los triángulos con todos sus lados iguales?",
@@ -41,7 +41,7 @@
             "Obtusángulo",
             "Rectángulo"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Cómo se llaman los triángulos con todos sus lados desiguales?",
@@ -53,7 +53,7 @@
             "Obtusángulo",
             "Rectángulo"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Cómo se llaman los triángulos con sus tres ángulos agudos?",
@@ -65,7 +65,7 @@
             "Obtusángulo",
             "Rectángulo"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Qué es un sistema de ecuación lineal?",
@@ -75,7 +75,7 @@
             "Es un conjunto de ecuaciones de segundo grado",
             "Es un conjunto de ecuaciones elevadas a 0"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Cuándo un sistema lineal es indeterminado?",
@@ -85,7 +85,7 @@
             "Cuando no tiene solución",
             "Cuando no se entiende"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "Una función lineal es comprendida por la fórmula",
@@ -95,7 +95,7 @@
             "x = my + b",
             "y = x + b"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Cual es la sucesión de Fibonacci?",
@@ -105,7 +105,7 @@
             "Es una sucesión donde cada número está definido por la resta de los dos anteriores",
             "Es una sucesión donde cada número está definido por la suma de los tres anteriores"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Cómo se llama el número superior de una fracción?",
@@ -115,7 +115,7 @@
             "Dividendo",
             "Divisor"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Qué es una fracción impropia?",
@@ -125,7 +125,7 @@
             "Fracción donde el denominador es mayor que el numerador",
             "Fracción donde el numerador es igual que el denominador"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Qué es una fracción propia?",
@@ -135,7 +135,7 @@
             "Fracción donde el denominador es menor que el numerador",
             "Fracción donde el numerador es igual que el denominador"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Qué número representa las centenas en 9836.574?",
@@ -145,7 +145,7 @@
             "5",
             "9"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Qué número representa la décimas en 638.29?",
@@ -155,7 +155,7 @@
             "3",
             "8"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Qué es un polígono?",
@@ -165,7 +165,7 @@
             "Es una figura geométrica compuesta por tres o más líneas, que crean una figura",
             "Es una figura geométrica compuesta por una o más líneas, que crean una figura cerrada"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Cómo se le llama al resultado de una multiplicación?",
@@ -175,7 +175,7 @@
             "Multiplicando",
             "Multiplicador"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "La suma de los lados de una figura geométrica plana es…",
@@ -184,7 +184,7 @@
             "Área",
             "Volumen"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "La extensión de una superficie de una figura geométrica plana es…",
@@ -193,7 +193,7 @@
             "Volumen",
             "Perímetro"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "La extensión de espacio tridimensional de una figura geométrica tridimensional es…",
@@ -202,7 +202,7 @@
             "Área",
             "Perímetro"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Cual es la suma de los ángulos de un triángulo?",
@@ -212,7 +212,7 @@
             "30 grados",
             "Depende del triángulo"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Cual es la suma de los ángulos de un cuadrilátero?",
@@ -222,7 +222,7 @@
             "40 grados",
             "Depende del triángulo"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Cómo se representa el cero en Romano?",
@@ -232,7 +232,7 @@
             "O",
             "C"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "question": "¿Cuáles son los números primos?",
@@ -242,6 +242,6 @@
             "Son los números que tienen únicamente 1 divisor",
             "Son los números que sus papás son hermanos"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     }
 ]
